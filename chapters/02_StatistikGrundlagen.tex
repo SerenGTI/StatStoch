@@ -1,0 +1,57 @@
+\chapter{Statistik}
+\section{Erste Kenngrößen}
+Als \emph{Urliste} bezeichnet man die Menge der Merkmale $X$ der Untersuchungseinheiten $U=\simpleset{x_1,\ldots,x_n}$.
+
+Die \emph{auftretenden Ausprägungen} von $X$ sind die Werte $\simpleset{a_1,\ldots,x_n}\subseteq\simpleset{x_1,\ldots,x_n}, k\leq n$.
+Oftmals treten in einem großen Datensatz der Größe $n$ nicht auch $n$ verschiedene Werte $x_i$ auf.
+
+Damit definieren sich 
+\begin{definition}{Absolute Häufigkeit}
+	Die absolute Häufigkeit einer auftretenden Ausprägung $a$ in einer Urliste $U$ ist
+	\begin{equation*}
+		h(a)=\left|\set{x\in U}{x=a}\right|.
+	\end{equation*}
+\end{definition}
+Es gilt immer, dass die Summe aller absoluten Häufigkeiten gleich der Datensatzgröße ist
+\begin{equation*}
+	\sum\limits_{i=1}^n h(a_i)=|U|.
+\end{equation*}
+
+Die absolute Häufigkeitsverteilung ist dargestellt durch die Folge von Werten
+$$h_1,\ldots,h_k=h(a_i),\ldots,h(a_k)$$
+
+
+Eine grafische Darstellung der absoluten Häufigkeitsverteilung nennt man ein \emph{Histogramm}.
+
+\begin{definition}{Relative Häufigkeit}
+	Die relative Häufigkeit einer auftretenden Ausprägung $a$ in einer Urliste $U$ ist
+	\begin{equation*}
+		f(a)=\frac{h(a)}{|U|}.
+	\end{equation*}
+\end{definition}
+Es gilt ähnlich wie bei der absoluten Häufigkeit für die Summe
+\begin{equation*}
+	\sum\limits_{i=1}^n f(a_i)=1.
+\end{equation*}
+
+\subsection{Kumulierte Häufigkeiten}
+Die absolut kumulierte Häufigkeitsverteilung ist die Funktion
+\begin{equation*}
+	H(x)=\sum\limits_{i:a_i\leq x} h_i
+\end{equation*}
+Ebenso, die relative kumulierte Häufigkeitsverteilung
+\begin{equation*}
+	F(x)=\sum\limits_{i:a_i\leq x} f_i
+\end{equation*}
+
+\section{Klassifizierung}
+Sind alle auftretenden Ausprägungen Elemente eines Interfalls $[a,b]$, lässt sich dieses in gleich große Klassen der Größe $d$ unterteilen.
+
+Eine Klassifizierung ist allgemein
+\begin{equation*}
+	[a, c_1), \ldots, [c_i,c_{i+1}), [c_{i+1},c_{i+2}), \ldots\quad \forall i: c_{i+1}-c_i=d
+\end{equation*}
+
+Klassifizierte Daten sind i.A. einfacher zu interpretieren als große Mengen von Daten, die sich nur wenig voneinander unterscheiden.
+
+\section{Lagemaße}
