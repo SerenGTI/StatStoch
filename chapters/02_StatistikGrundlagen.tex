@@ -54,4 +54,52 @@ Eine Klassifizierung ist allgemein
 
 Klassifizierte Daten sind i.A. einfacher zu interpretieren als große Mengen von Daten, die sich nur wenig voneinander unterscheiden.
 
+Der maximale Fehler bei der Klassifizierung ist die halbe Klassengröße.
+
 \section{Lagemaße}
+Lagemaße helfen beim Vergleich verschiedener Eigenschaften, bzw dem Vergleich verschiedener statistischer Einheiten mit einer gemeinsamen Eigenschaft. 
+
+\begin{definition}{Lagemaß}
+	Ein \emph{Lagemaß} ist eine Abbildung $L:\R^n\rightarrow \R$ mit der Eigenschaft
+	\begin{equation*}
+		L(x_1+a,\ldots,x_n+a)=L(x_1,\ldots,x_n)+a\quad \forall a,x_i\in\R\enspace (1\leq i\leq n)
+	\end{equation*}
+	Ein Lagemaß beschreibt das Zentrum einer Verteilung.
+\end{definition}
+
+Beispiele für Lagemaße sind
+
+\subsection{Arithmetisches Mittel}
+Das arithmetische Mittel ist nur für quantitative Merkmale sinnvoll. Es berechnet sich durch
+\begin{equation*}
+    \overline x=\frac 1n \sum\limits_{i=1}^n x_i=\sum\limits_{i=1}^n (a_i*f_i)
+\end{equation*}
+aus Rohdaten beziehungsweise aus den Häufigkeitsdaten.
+
+Mit dem arithmetischen Mittel gilt die sogenannte Schwerpunkteigenschaft
+\begin{equation*}
+	\sum\limits_{i=1}^n(x_i-\overline x)=0
+\end{equation*}
+
+Wie aus der Formel erkennbar, ist das arithmetische Mittel extrem empfindlich gegen Ausreißer. Dafür wurden die folgenden Mittel eingeführt.
+
+\paragraph{Das getrimmte Mittel}
+Um Ausreißer weniger stark ins Gewicht fallen zu lassen wird der Datensatz absichtlich verkleinert. Beim getrimmten Mittel aus einer sortiert vorliegenden Liste von Daten werden zum Beispiel die oberen und unteren $5\%$ der Daten abgeschnitten, damit fallen auch eventuelle Ausreißer raus. Die Datensatzgröße bleibt jedoch nicht erhalten.
+
+\paragraph{Das winsorisierte Mittel}
+Ähnlich wie beim getrimmten Mittel wird der Datensatz beim winsorisierten Mittel von oben und unten herein bearbeitet. Anstatt Daten zu löschen werden beispielsweise die oberen $5\%$ durch den nächstkleineren Wert ersetzt. Hierbei bleibt also die Datensatzgröße gleich.
+
+\subsection{Median}
+Der Median stellt ein robusteres Lagemaß als das arithmetische Mittel dar, er ist resistenter gegen Ausreißer im Datensatz.
+Für $x_1\leq x_2\leq\ldots\leq x_n$, also einen sortiert vorliegenden Datensatz ist der Median
+\begin{equation*}
+	x_{\operatorname{med}}=
+	\begin{cases}
+		x_{\frac{n+1}2}& \text{$n$ ungerade}\\
+		\frac 12 (x_{\frac n2}+x_{\frac n2 +1})& \text{$n$ gerade}\\
+	\end{cases}
+\end{equation*}
+Benötigt eine Zahlenordnung (oridnal).
+
+\subsection{Modus}
+
