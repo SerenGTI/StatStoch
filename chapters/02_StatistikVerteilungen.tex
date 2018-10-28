@@ -1,5 +1,5 @@
-\chapter{Statistik}
-\section{Erste Kenngrößen}
+\chapter{Verteilungen und ihre Darstellungen}
+\section{Häufigkeiten}
 Als \emph{Urliste} bezeichnet man die Menge der Merkmale $X$ der Untersuchungseinheiten $U=\simpleset{x_1,\ldots,x_n}$.
 
 Die \emph{auftretenden Ausprägungen} von $X$ sind die Werte $\simpleset{a_1,\ldots,x_n}\subseteq\simpleset{x_1,\ldots,x_n}, k\leq n$.
@@ -20,9 +20,6 @@ Es gilt immer, dass die Summe aller absoluten Häufigkeiten gleich der Datensatz
 Die absolute Häufigkeitsverteilung ist dargestellt durch die Folge von Werten
 $$h_1,\ldots,h_k=h(a_i),\ldots,h(a_k)$$
 
-
-Eine grafische Darstellung der absoluten Häufigkeitsverteilung nennt man ein \emph{Histogramm}.
-
 \begin{definition}{Relative Häufigkeit}
 	Die relative Häufigkeit einer auftretenden Ausprägung $a$ in einer Urliste $U$ ist
 	\begin{equation*}
@@ -34,17 +31,35 @@ Es gilt ähnlich wie bei der absoluten Häufigkeit für die Summe
 	\sum\limits_{i=1}^n f(a_i)=1.
 \end{equation*}
 
-\subsection{Kumulierte Häufigkeiten}
-Die absolut kumulierte Häufigkeitsverteilung ist die Funktion
-\begin{equation*}
-	H(x)=\sum\limits_{i:a_i\leq x} h_i
-\end{equation*}
-Ebenso, die relative kumulierte Häufigkeitsverteilung
-\begin{equation*}
-	F(x)=\sum\limits_{i:a_i\leq x} f_i
-\end{equation*}
 
-\section{Klassifizierung}
+Eine grafische Darstellung einer Häufigkeitsverteilung nennt man ein \emph{Histogramm}. Bei Histogrammen ist auf die Flächentreue zu achten, das bedeutet, dass der Flächeninhalt der aufgetragenen Rechtecke proportional (oder gleich) zu $h_j$ oder $f_j$ ist. So kann das menschliche Auge die Verteilung besser wahrnehmen.
+
+Hat das Histogramm einer Verteilung nur einen deutlich erkennbaren Hochpunkt (Gipfel), heißt sie \emph{unimodal}. Treten mehrere Gipfel auf nennt man die Verteilung \emph{multimodal}. Bei zwei Gipfeln spricht man von einer \emph{bimodalen} Verteilung.
+
+Man nennt eine Verteilung \emph{symmetrisch}, wenn es eine Symmetrieachse gibt, sodass die rechte und linke Hälfte der Verteilung annähernd zueinander spiegelbildlich sind. 
+Eine Verteilung heißt \emph{schief}, wenn sie deutlich unsymmetrisch ist. Sie heißt dann \emph{linkssteil oder rechtsschief}, wenn der überwiegende Anteil von Daten linksseitig konzentriert ist. Dann steigt die Verteilung links deutlich steiler ab als rechts. Entsprechend \emph{rechtssteile oder linksschiefe} Verteilungen.
+
+
+\section{Kumulierte Häufigkeiten}
+Die kumulierten Häufigkeitsverteilungen geben an, wie viele Datenpunkte der Urliste, beziehungsweise welcher Anteil der Daten unterhalb einer Schranke liegen. Um diese Aussage sinnvoll zu beantworten ist zumindest eine Ordinalskala nötig.
+
+\begin{definition}{Absolute kumulierte Häufigkeitsverteilung}
+	Die absolut kumulierte Häufigkeitsverteilung ist die Funktion
+	\begin{equation*}
+		H(x)=\sum\limits_{i:a_i\leq x} h_i.
+	\end{equation*}
+\end{definition}
+\begin{definition}{Relative kumulierte Häufigkeitsverteilung}
+	Die relative kumulierte Häufigkeitsverteilung oder auch empirische Verteilungsfunktion ist
+	\begin{equation*}
+		F(x)=\sum\limits_{i:a_i\leq x} f_i.
+	\end{equation*}
+\end{definition}
+Die kumulierten Häufigkeitsverteilungen sind monoton wachsende, Treppenfunktionen, die an den Sprungstellen rechtsseitig stetig sind.
+
+
+
+\section{Gruppierung}
 Sind alle auftretenden Ausprägungen Elemente eines Interfalls $[a,b]$, lässt sich dieses in gleich große Klassen der Größe $d$ unterteilen.
 
 Eine Klassifizierung ist allgemein
@@ -55,6 +70,7 @@ Eine Klassifizierung ist allgemein
 Klassifizierte Daten sind i.A. einfacher zu interpretieren als große Mengen von Daten, die sich nur wenig voneinander unterscheiden.
 
 Der maximale Fehler bei der Klassifizierung ist die halbe Klassengröße.
+
 
 \section{Lagemaße}
 Lagemaße helfen beim Vergleich verschiedener Eigenschaften, bzw dem Vergleich verschiedener statistischer Einheiten mit einer gemeinsamen Eigenschaft. 
@@ -76,9 +92,9 @@ Das arithmetische Mittel ist nur für quantitative Merkmale sinnvoll. Es berechn
 \end{equation*}
 aus Rohdaten beziehungsweise aus den Häufigkeitsdaten.
 
-Mit dem arithmetischen Mittel gilt die sogenannte Schwerpunkteigenschaft
+Mit dem arithmetischen Mittel gilt die sogenannte \emph{Schwerpunkteigenschaft}
 \begin{equation*}
-	\sum\limits_{i=1}^n(x_i-\overline x)=0
+	\sum\limits_{i=1}^n(x_i-\overline x)=0.
 \end{equation*}
 
 Wie aus der Formel erkennbar, ist das arithmetische Mittel extrem empfindlich gegen Ausreißer. Dafür wurden die folgenden Mittel eingeführt.
@@ -99,7 +115,37 @@ Für $x_1\leq x_2\leq\ldots\leq x_n$, also einen sortiert vorliegenden Datensatz
 		\frac 12 (x_{\frac n2}+x_{\frac n2 +1})& \text{$n$ gerade}\\
 	\end{cases}
 \end{equation*}
-Benötigt eine Zahlenordnung (oridnal).
+Benötigt eine Zahlenordnung, also eine Ordinalskala.
+
+Mindestens $50\%$ der Daten sind kleiner oder gleich $x_{\operatorname{med}}$, genauso sind mindestens $50\%$ der Daten größer oder gleich dem Median $x_{\operatorname{med}}$.
 
 \subsection{Modus}
+Der Modus ist die Ausprägung größter Häufigkeit $x_{\operatorname{mod}}=a_i$ mit $h(a_i)=\max \set{h(a)}{a\in A}$ wobei $A$ die Menge aller vorkommenden Ausprägungen der Urliste ist.
+Der Modus ist dann eindeutig, wenn die Häufigkeitsverteilung ein eindeutiges Maximum besitzt.
+
+Der Modus empfiehlt sich schon für nominalskalierte Daten.
+
+
+
+\subsection{Geometrisches Mittel}
+Für eine Urliste $U=\simpleset{u_1,\ldots,u_n}$ ist das geometrische Mittel definiert als
+\begin{equation*}
+	x_{\operatorname{geom}}=\sqrt[n]{\prod_{i=1}^n u_i}.
+\end{equation*}
+Das geometrische Mittel wird z.B. bei der Berechnung des effektiven Jahreszinses verwendet, es stellt jedoch kein Lagemaß im engeren Sinne dar.
+
+\subsection{Harmonisches Mittel}
+Für eine Urliste $U=\simpleset{u_1,\ldots,u_n}$ ist das harmonische Mittel definiert als
+\begin{equation*}
+	x_{\operatorname{harm}}=\frac{1}{\frac 1n\sum_{i=1}^n \frac 1{x_i}}.
+\end{equation*}
+Genauso wie das geometrische Mittel zählt das harmonische nicht zu den Lagemaßen im engeren Sinne.
+
+\section{Lageregeln}
+Für symmetrische Verteilungen gilt $\overline x\approx x_{\operatorname{med}}\approx x_{\operatorname{mod}}$.
+
+Für linkssteile Verteilungen $\overline x> x_{\operatorname{med}}> x_{\operatorname{mod}}$.
+
+Und ebenso für rechtssteile Verteilungen $\overline x< x_{\operatorname{med}}< x_{\operatorname{mod}}$.
+
 
