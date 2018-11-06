@@ -1,0 +1,87 @@
+\section{Lagemaße}
+Lagemaße helfen beim Vergleich verschiedener Eigenschaften, bzw dem Vergleich verschiedener statistischer Einheiten mit einer gemeinsamen Eigenschaft. 
+
+\begin{definition}{Lagemaß}
+	Ein \emph{Lagemaß} ist eine Abbildung $L:\R^n\rightarrow \R$ mit der Eigenschaft
+	\begin{equation*}
+		L(x_1+a,\ldots,x_n+a)=L(x_1,\ldots,x_n)+a\quad \forall a,x_i\in\R\enspace (1\leq i\leq n)
+	\end{equation*}
+	Ein Lagemaß beschreibt das Zentrum einer Verteilung.
+\end{definition}
+
+Beispiele für Lagemaße sind
+
+\subsection{Arithmetisches Mittel}
+Das arithmetische Mittel ist nur für quantitative Merkmale sinnvoll. Es berechnet sich durch
+\begin{equation*}
+    \overline x=\frac 1n \sum\limits_{i=1}^n x_i=\sum\limits_{i=1}^n (a_i*f_i)
+\end{equation*}
+aus Rohdaten beziehungsweise aus den Häufigkeitsdaten.
+
+Mit dem arithmetischen Mittel gilt die sogenannte \emph{Schwerpunkteigenschaft}
+\begin{equation*}
+	\sum\limits_{i=1}^n(x_i-\overline x)=0.
+\end{equation*}
+
+Unter einer linearen Transformation $x\mapsto ax+b$ verhält sich das arithmetische Mittel analog
+\begin{equation*}
+    \overline x =\frac 1n\sum_{i=1}^n (ax_i+b)=\frac an\sum_{i=1}^n x_i+b=a\overline x +b
+\end{equation*}
+
+
+Wie aus der Formel erkennbar, ist das arithmetische Mittel extrem empfindlich gegen Ausreißer. Dafür wurden die folgenden Mittel eingeführt.
+
+\paragraph{Das getrimmte Mittel}
+Um Ausreißer weniger stark ins Gewicht fallen zu lassen wird der Datensatz absichtlich verkleinert. Beim getrimmten Mittel aus einer sortiert vorliegenden Liste von Daten werden zum Beispiel die oberen und unteren $5\%$ der Daten abgeschnitten, damit fallen auch eventuelle Ausreißer raus. Die Datensatzgröße bleibt jedoch nicht erhalten.
+
+\paragraph{Das winsorisierte Mittel}
+Ähnlich wie beim getrimmten Mittel wird der Datensatz beim winsorisierten Mittel von oben und unten herein bearbeitet. Anstatt Daten zu löschen werden beispielsweise die oberen $5\%$ durch den nächstkleineren Wert ersetzt. Hierbei bleibt also die Datensatzgröße gleich.
+
+\subsection{Median}
+Der Median stellt ein robusteres Lagemaß als das arithmetische Mittel dar, er ist resistenter gegen Ausreißer im Datensatz.
+Für $x_1\leq x_2\leq\ldots\leq x_n$, also einen sortiert vorliegenden Datensatz ist der Median
+\begin{equation*}
+	x_{\operatorname{med}}=
+	\begin{cases}
+		x_{\frac{n+1}2}& \text{$n$ ungerade}\\
+		\frac 12 (x_{\frac n2}+x_{\frac n2 +1})& \text{$n$ gerade}\\
+	\end{cases}
+\end{equation*}
+Benötigt eine Zahlenordnung, also eine Ordinalskala.
+
+Der Modus verhält sich unter linearer Transformation $y=ax+b$ genauso wie das arithmetische Mittel $y_{\operatorname{med}}=ax_{\operatorname{med}}+b$.
+
+Mindestens $50\%$ der Daten sind kleiner oder gleich $x_{\operatorname{med}}$, genauso sind mindestens $50\%$ der Daten größer oder gleich dem Median $x_{\operatorname{med}}$.
+
+\subsection{Modus}
+Der Modus ist die Ausprägung größter Häufigkeit $x_{\operatorname{mod}}=a_i$ mit $h(a_i)=\max \set{h(a)}{a\in A}$ wobei $A$ die Menge aller vorkommenden Ausprägungen der Urliste ist.
+Der Modus ist dann eindeutig, wenn die Häufigkeitsverteilung ein eindeutiges Maximum besitzt.
+
+Der Modus empfiehlt sich schon für nominalskalierte Daten.
+
+Der Modus verhält sich unter linearer Transformation $y=ax+b$ genauso wie das arithmetische Mittel $y_{\operatorname{mod}}=ax_{\operatorname{mod}}+b$.
+
+
+
+\subsection{Geometrisches Mittel}
+Für eine Urliste $U=\simpleset{u_1,\ldots,u_n}$ ist das geometrische Mittel definiert als
+\begin{equation*}
+	x_{\operatorname{geom}}=\sqrt[n]{\prod_{i=1}^n u_i}.
+\end{equation*}
+Das geometrische Mittel wird z.B. bei der Berechnung des effektiven Jahreszinses verwendet, es stellt jedoch kein Lagemaß im engeren Sinne dar.
+
+\subsection{Harmonisches Mittel}
+Für eine Urliste $U=\simpleset{u_1,\ldots,u_n}$ ist das harmonische Mittel definiert als
+\begin{equation*}
+	x_{\operatorname{harm}}=\frac{1}{\frac 1n\sum_{i=1}^n \frac 1{x_i}}.
+\end{equation*}
+Genauso wie das geometrische Mittel zählt das harmonische nicht zu den Lagemaßen im engeren Sinne.
+
+
+
+\section{Lageregeln}
+Für symmetrische Verteilungen gilt $\overline x\approx x_{\operatorname{med}}\approx x_{\operatorname{mod}}$.
+
+Für linkssteile Verteilungen $\overline x> x_{\operatorname{med}}> x_{\operatorname{mod}}$.
+
+Und ebenso für rechtssteile Verteilungen $\overline x< x_{\operatorname{med}}< x_{\operatorname{mod}}$.
