@@ -9,35 +9,12 @@ Um eine Verteilung sinnvoll beschreiben zu können sind zusätzlich zu den Lagem
 	Ein Streuungsmaß stellt dar, wie weit gestreut Werte einer Verteilung um ein Mittel liegen.
 \end{definition}
 
-\subsection{Variationsbreite, Stichprobenspannweite}
+\subsection{Spannweite, Stichprobenspannweite}
 Die Stichproblenspannweite stellt dar, in welchem Bereich die Ausprägungen liegen, denn diese ist einfach
 \begin{equation*}
 	x_{\operatorname{max}}-x_{\operatorname{min}}.
 \end{equation*}
 
-\subsection{Standardabweichung}
-Die Standardabweichung ist für eine Urliste $U=\simpleset{x_1,\ldots,x_n}$ von metrischen Daten definiert als
-\begin{equation*}
-	\tilde s=\sqrt{\frac 1n\sum_{i=1}^n (x_i-\overline x)^2}=\sqrt{\sum_{i=1}^n (a_i-\overline x)^2*f_i}
-\end{equation*}
-wobei die $a_i$ die Ausprägungen der Urliste sind und $f_i$ die relative Häufigkeit der Ausprägung $a_i$ ist.
-
-Unter einer linearen Transformation $x\mapsto ax+b$ der Ausprägungen wird $\tilde s$ um $|a|$ gedehnt. Eine Verschiebung der Werte um $b$ hat keine Auswirkung.
-
-\subsection{Variationskoeffizient}
-Der Variationskoeffizient ist eine maßstabsunabhängige Maßzahl für die Streuung, sie basiert auf der Standardabweichung und ist definiert als
-\begin{equation*}
-	v=\frac{\tilde s}{\overline x},\quad \overline x>0
-\end{equation*}
-
-\subsection{Varianz, empirische Varianz}
-Die empirische Varianz ist das Quadrat der Standardabweichung $\tilde s^2$.
-
-\subsection{Stichprobenvarianz}
-Die Stichprobenvarianz stellt ein nicht resistentes Streuungsmaß dar. Sie ist für eine Urliste $U=\simpleset{x_1,\ldots,x_n}$ definiert als
-\begin{equation*}
-	s^2=\frac{1}{n-1}\sum_{i=1}^n (x_i-\overline x)^2=\frac{1}{n-1}\sum_{i=1}^n x_i^2 - n*\overline x^2
-\end{equation*}
 
 \subsection{Mittlere absolute Abweichung vom Median}
 Die mittlere absolute Abweichung vom Median stellt eine robustere Alternative zur Stichprobenvarianz dar. Sie ist für eine Urliste $U=\simpleset{x_1,\ldots,x_n}$ definiert als 
@@ -75,12 +52,15 @@ Dabei nennt man das $25\%$-Quantil auch das \emph{untere Quartil} und entspreche
 \end{definition}
 Mit dem IQR können Zäune festgelegt werden, außerhalb derer sich höchstwahrscheinlich Ausreißer des Merkmals befinden. Ein Beispiel hierfür ist zum Beispiel der untere Zaun $z_u=x_{0.25}-1.5*d_Q$ und entsprechend die Obergrenze $z_o=x_{0.75}+1.5*d_q$, diese Werte werden wiederum beim Box-Plot verwendet.
 
-\subsubsection{Box-Plot}
-Das Box-Plot ist eine einfache Art und Weise die Ausprägungen einer Verteilung übersichtlich darzustellen. Für den Box-Plot ist ein 5-Tupel, $(z_u, x_{0.25}, x_{\operatorname{med}}, x_{0.75}, z_o)$ aus Werten ausreichend.
-Beim Boxplot werden zwei Definitionen unterschieden, der \glqq normale\grqq\ Box-Plot und der modifizierte.
+\subsection{Fünf-Punkte-Zusammenfassung}
+Die Quartile, das Minimum, Maximum sowie der Median teilen den Datensatz in vier Teile, wobei jeder etwa ein Viertel der Merkmale enthält. Die Angabe dieser fünf Werte wird auch als Fünf-Punkte-Zusammenfassung bezeichnet.
 
-Beim Box-Plot wird ein Rechteck zwischen $x_{0.25}$ und $x_{0.75}$ gezeichnet, das $x_{\operatorname{med}}$ beinhaltet.
-So sieht man dass sich 50\% der Datenpunkte innerhalb der Box befinden. Die nach außen gezeichneten Linien geben an, wie weit die Datenpunkte gestreut liegen. Diese sogenannten Whiskers enden bei $z_u$ bzw. $z_o$, diese Werte unterscheiden sich bei den beiden Definitionen.
+\subsubsection{Box-Plot}
+Das Box-Plot ist eine einfache Art und Weise die Ausprägungen einer Verteilung zu visualisieren. Für den Box-Plot wird eine fünf-Punkte-Zusammenfassung, $(z_u, x_{0.25}, x_{\operatorname{med}}, x_{0.75}, z_o)$ verwendet, wobei $z_u$ und $z_o$ beim modifizierten Box-Plot von der klassischen fünf-Punkte-Zusammenfassung abweichen können.
+Daran werden zwei Definitionen unterschieden, der \glqq normale\grqq\ und der modifizierte Box-Plot.
+
+Beim Box-Plot wird ein Rechteck zwischen den Quartilen gezeichnet, das $x_{\operatorname{med}}$ eingezeichnet als Linie oder Punkt beinhaltet.
+So sieht man dass sich $50\%$ der Datenpunkte innerhalb der Box befinden. Die nach außen gezeichneten Linien geben an, wie weit die restlichen $50\%$ der Datenpunkte gestreut liegen. Diese sogenannten Whiskers enden in Abhängigkeit von $z_u$ bzw. $z_o$, diese Werte unterscheiden sich bei den beiden Definitionen.
 
 \paragraph{Normaler Box-Plot}
 Das Fünftupel besteht aus den Werten $(x_{\operatorname{min}}, x_{0.25}, x_{\operatorname{med}}, x_{0.75}, x_{\operatorname{max}})$. Wobei $x_{\operatorname{min}}$ und $x_{\operatorname{max}}$ die kleinste und größte Ausprägung der Verteilung darstellen. So sind alle Werte in der Spannweite der Whiskers enthalten. Ein Box-Plot sieht dann wie folgt aus
@@ -124,3 +104,97 @@ Der wichtigste Unterschied zum normalen Box-Plot ist dass, anstatt der minimalen
 \end{center}
 
 
+\subsection{Standardabweichung}
+Die Standardabweichung ist für eine Urliste $U=\simpleset{x_1,\ldots,x_n}$ von metrischen Daten definiert als
+\begin{equation*}
+	\tilde s=\sqrt{\frac 1n\sum_{i=1}^n (x_i-\overline x)^2}=\sqrt{\sum_{i=1}^n (a_i-\overline x)^2*f_i}
+\end{equation*}
+wobei die $a_i$ die Ausprägungen der Urliste sind und $f_i$ die relative Häufigkeit der Ausprägung $a_i$ ist.
+
+Unter einer linearen Transformation $x\mapsto ax+b$ der Ausprägungen wird $\tilde s$ um $|a|$ gedehnt. Eine Verschiebung der Werte um $b$ hat keine Auswirkung.
+
+\subsection{Variationskoeffizient}
+Der Variationskoeffizient ist eine maßstabsunabhängige Maßzahl für die Streuung, sie basiert auf der Standardabweichung und ist definiert als
+\begin{equation*}
+	v=\frac{\tilde s}{\overline x},\quad \overline x>0
+\end{equation*}
+
+\subsection{Varianz, empirische Varianz}
+Die empirische Varianz ist das Quadrat der Standardabweichung $\tilde s^2$.
+\begin{equation*}
+	\tilde s^2 = \frac 1n\sum_{i=1}^n (x_i-\overline x)^2
+\end{equation*}
+Sowohl Standardabweichung als auch die Varianz sind nicht resistent, reagieren also sehr empfindlich auf Ausreißer. 
+
+Für eine Berechnung von Hand gilt der sogenannte Verschiebungssatz
+\begin{satz}{Verschiebungssatz}
+	Für jedes $c\in\R$ gilt
+	\begin{equation*}
+	    \sum_{i=1}^n(x_i-c)^2=\sum_{i=1}^n(x_i-\overline x)^2+n(\overline x -c)^2.
+	\end{equation*}
+	Damit gilt insbesondere mit $c=0$ für die Varianz
+	\begin{equation*}
+		\tilde s^2=\left(\frac1n \sum_{i=1}^n x_i^2\right)-\overline x.
+	\end{equation*}
+\end{satz}
+\paragraph{Beweis:}
+\begin{align*}
+    \sum_{i=1}^n(x_i-c)^2&=\sum_{i=1}^n(x_i-\overline x+\overline x-c)^2\\
+    &=\sum_{i=1}^n\left[(x_i-\overline x)^2+2(x_i-\overline x)(\overline x-c)+(\overline x-c)^2\right]\\
+    &=\sum_{i=1}^n(x_i-\overline x)^2 + \underbrace{2(\overline x-c)\sum_{i=1}^n(x_i-\overline x)}_{=0}+\sum_{i=1}^n(\overline x-c)^2\\
+    &=\sum_{i=1}^n(x_i-\overline x)^2+n(\overline x -c)^2
+\end{align*}
+
+\paragraph{Lineare Transformation}
+Mit einer linearen Abbildung der Ausprägungen $y_i=ax_i+b$ verhält sich die Varianz der Daten $y_i$
+\begin{equation*}
+	\tilde s_y^2=a^2\tilde s_x^2\text{ bzw. }\tilde s_y=|a|\tilde s_x
+\end{equation*}
+dies ergibt sich direkt aus den Formeln für die Varianz
+\begin{align*}
+    \tilde s_y^2&=\frac 1n\sum_{i=1}^n(y_i-\overline y)^2\\
+    &=\frac 1n \sum_{i=1}^n(ax_i+b-a\overline x-b)^2\\
+    &=a^2\frac 1n\sum_{i=1}^n(x_i-\overline x)^2=a^2\tilde s_x^2
+\end{align*}
+
+\subsection{Stichprobenvarianz}
+Die Stichprobenvarianz stellt ein nicht resistentes Streuungsmaß dar. Sie ist für eine Urliste $U=\simpleset{x_1,\ldots,x_n}$ definiert als
+\begin{equation*}
+	s^2=\frac{1}{n-1}\sum_{i=1}^n (x_i-\overline x)^2=\frac{1}{n-1}\sum_{i=1}^n x_i^2 - n*\overline x^2
+\end{equation*}
+
+
+
+\section{Konzentrationsmaße}
+Konzentration geben Aufschluss über die Stärke der Konzentration von Daten.
+\subsection{Lorenzkurve}
+Ausgehend von geordneten Ausprägungen $x_1\leq\ldots\leq x_n$ stellt die Lorenzkurve den Anteil der kumulierten relativen Merkmalssumme bezüglich dem Anteil der Merkmalsträger von der Grundgesamtheit dar.
+
+\begin{definition}{Lorenzkurve}
+	Die Lorenzkurve ergibt sich als Streckenzug durch die Punkte $(0,0), (u_1,v_1),\ldots,(1,1)$ wobei
+	\begin{align*}
+	    u_j=\frac jn \quad \text{und}\quad 
+	    v_j=\frac{\sum_{i=1}^j x_i}{\sum_{i=1}^n x_i}
+	\end{align*}
+ist.
+\end{definition}
+
+Der Grundgedanke ist, darzustellen auf welchen Teil der Merkmalsträger welcher Anteil der Merkmalssumme zuruckgeht.
+
+Die Lorenzkurve wächst immer monoton und konvex, d.h. sie wölbt sich nach unten.
+
+\subsection{Gini-Koeffizient}
+In der Lorenzkurve drückt sich Konzentration der Daten durch Entfernung von der ersten Winkelhalbierenden aus. Genau dies nutzt der Gini-Koeffizient $G$ aus.
+
+$G$ ist gleich dem Verhältnis zwischen dem von Lorenzkurve und Diagonale eingeschlossenen Flächeninhalt und der Fläche unter der Winkelhalbierenden.
+
+\begin{equation*}
+	G=\frac{2\sum_{i=1}^n ix_i}{n\sum_{i=1}^n x_i}-\frac{n+1}{n}\quad G\in[0,\infty)
+\end{equation*}
+
+Dabei ist der minimale Wert des Gini-Koeffizienten $G_{\text{min}}=0$ und das Maximum ist $G_{\text{max}}=\frac{n-1}n$.
+
+Da der Wert des Gini-Koeffizienten mit von der Eingabegröße abhängnen kann, bietet sich der normierte Gini-Koeffizient für Vergleiche an
+\begin{equation*}
+	G^\ast = \frac{G}{G_{\text{max}}}=\frac{n}{n-1}G\quad G^\ast\in[0,1]
+\end{equation*}

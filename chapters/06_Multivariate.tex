@@ -1,0 +1,41 @@
+\chapter{Multivariate}
+Bisher wurden nur eindimensionale Daten erfasst, nicht aber verschschiedene Merkmale in Zusammenhang gebracht und gemeinsam betrachtet oder miteinander verglichen.
+\section{Kontingenztafel}
+Die Kontingenztabelle eignet sich zu Darstellung der gemeinsamen Verteilung von zwei Diskreten Merkmalen mit relativ wenigen Ausprägungen.
+
+Auf Basis der Ausprägungen $a_1,\ldots,a_k$ des Merkmals $X$ und $b_1,\ldots,b_m$ für $Y$ liegen in der Urliste die gemeinsamen Messwerte vor. Das heißt die Urliste besteht aus den Tupeln $(a_i,b_j)$. Analog zum Eindimensionalen sind die absoluten Häufigkeiten $h_{ij}$ definiert. Darauf aufbauend ebenfalls völlig analog die relativen Häufigkeiten $f_{ij}$.
+
+\paragraph{Kontingenztafel der absoluten Häufigkeiten}
+Die aus diesen Werten entstehende Tafel heißt $(k\times m)$-Kontingenztafel der absoluten Häufigkeiten. Sie enthält neben den Häufigkeitsdaten zusätzlich noch die Spalten- beziehungsweise Zeilensummen der Werte.
+
+\begin{center}
+	\begin{tabular}{c|ccc|c}
+		& $b_1$ & $\cdots$ & $b_m$ &\\
+		\hline $a_1$ & $h_{11}$ & $\cdots$ & $h_{1m}$&$h_{1\cdot}=\sum_{i=1}^m h_{1i}$\\
+		$a_2$ & $h_{21}$ & $\cdots$ & $h_{2m}$&$h_{2\cdot}=\sum_{i=1}^m h_{2i}$\\
+		$\vdots$ & $\vdots$ & $\cdots$ & $\vdots$&\\
+		$a_1$ & $h_{k1}$ & $\cdots$ & $h_{km}$&$h_{k\cdot}=\sum_{i=1}^m h_{ki}$\\
+		\hline &$h_{\cdot1}$&&$h_{\cdot m}$&$n$
+	\end{tabular}
+\end{center}
+
+Die Zeilensummen $h_{i\cdot}$ werden auch als Randhäufigkeiten des Merkmals $X$ bezeichnet. Diese Werte sind die einfachen Häufigkeiten mit denen das Merkmal $X$ die Werte $a_1,\ldots,a_k$ annimmt, wenn $Y$ nicht berücksichtigt wird.
+
+Analog dazu sind die Spaltensummen die Häufigkeiten von $Y$ unter Vernachlässigung des Merkmals $X$.
+
+\paragraph{Kontingenztafel der relativen Häufigkeiten}
+Da Anteile beziehungsweise Prozente häufig anschaulicher sind als absolute Häufigkeitswerte betrachtet man häufig auch die Häufigkeitstafel der relativen Häufigkeiten. Diese entsteht durch teilen durch die Gesamtzahl $n$.
+
+\begin{center}
+	\begin{tabular}{c|ccc|c}
+		& $b_1$ & $\cdots$ & $b_m$ &\\
+		\hline $a_1$ & $h_{11}$ & $\cdots$ & $h_{1m}$&$f_{1\cdot}=\sum_{i=1}^m f_{1i}$\\
+		$a_2$ & $f_{21}$ & $\cdots$ & $f_{2m}$&$f_{2\cdot}=\sum_{i=1}^m f_{2i}$\\
+		$\vdots$ & $\vdots$ & $\cdots$ & $\vdots$&\\
+		$a_1$ & $f_{k1}$ & $\cdots$ & $f_{km}$&$f_{k\cdot}=\sum_{i=1}^m f_{ki}$\\
+		\hline &$f_{\cdot1}$&&$f_{\cdot m}$&$1$
+	\end{tabular}
+\end{center}
+
+\section{Bedingte Häufigkeiten}
+S125/110
