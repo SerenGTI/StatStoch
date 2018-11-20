@@ -99,3 +99,36 @@ Da auch dieser für einen sinnvollen Vergleich nicht ausreichend normiert ist, w
 \end{equation*}
 
 Sowohl der Kontingenzkoeffizient als auch der $\chi^2$-Koeffizient stellen nur die Stärke des Zusammenhangs dar, nicht aber eine Richtung der Wirkungsweise. 
+
+\subsection{Empirischer Korrelationskoeffizient (Bravais-Pearson)}
+Um nicht nur die Stärke des Zusammenhangs zu untersuchen sondern auch die Richtung der Wirkungsweise, wird der empirische Korrelationskoeffizient auf metrischen Merkmalen eingeführt.
+\begin{definition}{Emp. Korrelationskoeffizient nach Bravais-Pearson}
+	Für zwei metrische Merkmale $X$ und $Y$ auf einer Urliste der Größe $n$ ist der empirische Korrelationskoeffizient
+	\begin{equation*}
+		r=\frac{\frac1n\sum\limits_{i=1}^n (x_i-\overline x)(y_i-\overline y)}{\sqrt{\frac1n\sum\limits_{i=1}^n (x_i-\overline x)^2} * \sqrt{\frac1n\sum\limits_{i=1}^n (y_i-\overline y)^2}}=\frac{\tilde s_{XY}}{\tilde s_X*\tilde s_Y}
+	\end{equation*}
+	wobei $\tilde s_X$ bzw. $\tilde s_Y$ die Standardabweichungen der Merkmale $X$ und $Y$ sind.
+\end{definition}
+Der Korrelationskoeffizient misst die Stärke des linearen Zusammenhangs.
+Damit ergibt sich für $r>0$ eine positive Korrelation also ein gleichsinniger Zusammenhang und ein gegensinniger Zusammenhang für $r<0$. Bei $r\approx0$ sind die Merkmale nicht korreliert.
+
+\paragraph{Empirische Kovarianz}
+Die Kovarianz ist die Summe der Abweichungsprodukte mit $n$ normiert.
+\begin{equation*}
+	\tilde s_{XY}=\frac1n\sum\limits_{i=1}^n (x_i-\overline x)(y_i-\overline y)
+\end{equation*}
+
+\paragraph{Rechengünstige Variante des Korrelationskoeffizienten}
+\begin{equation*}
+	r=\frac{\sum\limits_{i=1}^n (x_iy_i)-n\overline x\overline y}{\sqrt{\left(\sum\limits_{i=1}^n x_i^2 -n\overline x^2\right)*\left(\sum\limits_{i=1}^n y_i^2 -n\overline y^2\right)}}
+\end{equation*}
+
+\subsection{$\phi$-Koeffizient}
+Für Merkmale mit nur zwei Ausprägungen (\emph{dichotome} oder \emph{binäre} Merkmale) wird der Bravis-Pearson-Koeffizient auch $\phi$-Koeffizient genannt. Er berechnet sich aus den Häufigkeitseinträgen der Kontingenztafel
+\begin{equation*}
+	r=\frac{h_{11}*h_{22}-h_{12}*h_{21}}{\sqrt{h_{1*}h_{2*}h_{*1}h_{*2}}}=\phi
+\end{equation*}
+Es gilt sogar zusätzlich
+\begin{equation*}
+	\phi^2=\frac{\chi^2}{n}
+\end{equation*}
