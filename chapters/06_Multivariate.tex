@@ -38,4 +38,64 @@ Da Anteile beziehungsweise Prozente häufig anschaulicher sind als absolute Häu
 \end{center}
 
 \section{Bedingte Häufigkeiten}
-S125/110
+Aus den gemeinsamen Häufigkeiten lässt sich nicht direkt auf den Zusammenhang zweier Merkmale schließen.
+So kann man ein Merkmal fest wählen und dann die Häufigkeitsverteilung des anderen Merkmals unabhängig davon betrachten, mit dieser Herangehensweise kommt man zu den bedingten Häufigkeiten.
+
+\begin{definition}{Bedingte Häufigkeiten}
+	Für zwei Merkmale $X$ und $Y$ mit den Ausprägungen $a_1,\ldots,a_k$ und $b_1,\ldots,b_m$ ist
+	\begin{equation*}
+		f_Y(b_j|a_i)=\frac{h_{ij}}{h_i}
+	\end{equation*}
+	die Häufigkeit des Merkmals $b_j$ aus $Y$ unter der Bedingung $X=a_i$.
+
+	Daraus geht durch die Werte 
+	\begin{equation*}
+		f_Y(b_1|a_i),\ \ldots,\ f_Y(b_m|a_i)
+	\end{equation*}
+	die bedingte Häufigkeitsverteilung von $Y$ unter der Bedingung $X=a_i$ (Kurzschreibweise: $(Y|X=a_i)$) hervor.
+
+	Analog für eine fest gewählte Ausprägung $Y=b_i$ die bedingte Häufigkeitsverteilung $f_X(a_j|b_i)$.
+\end{definition}
+
+
+\section{Zusammenhangsmaße}
+Wir betracten zunächst wie sich zwei Merkmale zueinander verhalten würden, wenn keinerlei Zusammenhang zwischen ihnen bestünde.
+
+In einer Kontingenztafel müssten sich dann die einzelnen Spalten proportional zu den Spaltensummen verhalten und analog die Zeilen zu den Zeilensummen.
+Daraus ergibt sich die \emph{erwartete Häufigkeit einer Ausprägung bei unabhängigen Merkmalen} $X$ und $Y$
+\begin{equation*}
+	\tilde h_{ij}=\frac{h_{i*}*h_{*j}}{n}
+\end{equation*}
+
+Um den Zusammenhang zweier Merkmale zu untersuchen betrachten wir also den Unterschied zwischen den tatsächlichen Häufigkeiten $h_{ij}$ und den jeweils erwarteten Häufigkeiten $\tilde h_{ij}$.
+
+\subsection{$\chi^2$-Koeffizient}
+Basierend auf der oben angesprochenen Differenz wird das erste Zusammenhangsmaß konstruiert.
+\begin{definition}{$\chi^2$-Koeffizient}
+	Für zwei Merkmale $X$ und $Y$ mit den Ausprägungen $a_1,\ldots,a_k$ und $b_1,\ldots,b_m$ ist
+	\begin{equation*}
+		\chi^2 = \sum\limits_{i=1}^k\sum\limits_{j=1}^m\frac{(h_{ij}-\tilde h_{ij})^2}{\tilde h_{ij}}\quad \chi^2\in[0,\infty)
+	\end{equation*}
+\end{definition}
+
+Ist $\chi^2$ groß, weichen die Häufigkeiten also stark von der Erwartung ab, hängen die Merkmale vermutlich voneinander ab. Sind die Abweichungen allerdings relativ klein und damit $\chi^2$ ebenfalls, so sind die Merkmale wahrscheinlich unabhängig. Selbst bei unabhängigen Merkmalen ist meist wegen zufälligem Rauschen $\chi^2\neq0$, eine Entscheidung ist so also nicht möglich.
+
+\subsection{Kontingenzkoeffizient}
+Problematisch am $\chi^2$-Koeffizienten ist die Abhängigkeit von der Dimension der Tafel. Es kann nicht ohne weiteres aus dem Wert des Koeffizienten auf eine Unabhängigkeit der Merkmale geschlossen werden.
+
+Als erster Normierungsschritt folgt daraus der Kontingenzkoeffizient.
+\begin{definition}{Kontingenzkoeffizient}
+	Aus dem $\chi^2$-Koeffizienten für zwei Merkmale mit der Urliste der Größe $n$ ist der Kontingenzkoeffizient
+	\begin{equation*}
+		K=\sqrt{\frac{\chi^2}{n+\chi^2}} \quad K\in[0, K_{\mathrm{max}}] \text{ für } K_{\mathrm{max}}=\sqrt{\frac{M-1}{M}},\enspace M=\max\simpleset{m,k}
+	\end{equation*}
+	Dabei seien $m$ und $k$ die Mächtigkeit der Ausprägungsliste der beiden Merkmale.
+\end{definition}
+
+\paragraph{Korrigierter Kontingenzkoeffizient}
+Da auch dieser für einen sinnvollen Vergleich nicht ausreichend normiert ist, wird der korrigierte Kontingenzkoeffizient eingeführt, wobei $K$ durch $K_{\mathrm{max}}$ normiert wird.
+\begin{equation*}
+	K^\ast = \frac{K}{K_{\mathrm{max}}}\quad K^\ast \in [0,1]
+\end{equation*}
+
+Sowohl der Kontingenzkoeffizient als auch der $\chi^2$-Koeffizient stellen nur die Stärke des Zusammenhangs dar, nicht aber eine Richtung der Wirkungsweise. 
