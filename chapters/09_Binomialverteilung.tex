@@ -1,0 +1,40 @@
+%!TEX root = ../main.tex
+\subsubsection{Binomialverteilung}
+\begin{definition}{Bernoulli-Experiment}
+	Ein Bernoulli-Experiment ist ein Zufallsexperiment mit genau zwei möglichen Ausgängen. Das heißt für eine Zufallsvariable $X$ gilt $X(\Omega)=\simpleset{0,1}$ mit den Wahrscheinlichkeiten
+	\begin{align*}
+		P(X=1)=p && P(X=0)=(1-p)=q
+	\end{align*}
+\end{definition}
+\paragraph{Bemerkung:}
+Der Erwartungswert eines Bernoulli-Experiments ist $E(X)=p$. Für die Varianz gilt 
+\begin{equation*}
+	V(X)=E(X)^2-2p*E(X)+p^2=p-p^2=p(1-p)=pq
+\end{equation*}
+
+Führt man nun $n$ \emph{unabhängige} Bernoulli-Experimente $X_i, i\in\simpleset{1,\ldots,n}$ durch, erhält man eine sogenannte \emph{Bernoulli-Kette} der Länge $n$. Ein Ereignis dieses Grundraums ist $\omega=(\omega_1,\ldots,\omega_n)$ wobei $X_i(\omega)=\omega_i$ gilt.
+
+Der Grundraum der Bernoulli-Kette ist also $\Omega=\simpleset{0,1}^n$. Damit gilt für die Verteilung des Wahrscheinlichkeitsraums
+
+\begin{align*}
+	P(\simpleset{(\omega_1,\ldots,\omega_n)})&=P(X_1=\omega_1, X_2=\omega_2, \ldots, X_n=\omega_n)\\
+	&=\prod_{i=1}^n P(X_i=\omega_i) &\text{(Unabhängigkeit)}\\
+	&=\prod_{\mathclap{i:\omega_i=1}}p * \prod_{\mathclap{i:\omega_i=0}}(1-p)
+\end{align*}
+Damit ist bei $n$ Durchführungen die Wahrscheinlichkeit $k$ mal das Ergebnis $\omega_i=1$ zu erhalten ($k$ Treffer bei $n$ Versuchen) 
+\begin{equation*}
+	p^k*(1-p)^{n-k}
+\end{equation*}
+
+Betrachten wir nun also die Zufallsvariable $X$, die die Summe der Treffer beschreibt $X:\sum_{i=1}^n X_i$.
+Das Ereignis $\simpleset{X=k}=\set{(\omega_1,\ldots,\omega_n)\in\Omega}{\sum_{i=1}^n \omega_i=k}$ beschreibt die Ausgänge, bei denen genau $k$ von $n$ Treffer aufgetreten sind. Es ist $|\simpleset{X=k}|=\binom nk$. Damit erhält man insgesamt
+\begin{equation*}
+	P(X=k)=\binom nk * p^k*(1-p)^{n-k}.
+\end{equation*}
+Man nennt $X$ dann \emph{binomialverteilt} mit den Parametern $n$ und $p$, man schreibt $X\sim Bin(n,p)$.
+
+Für den Erwartungswert und die Varianz von binomialverteilten Zufallsvariablen gilt
+\begin{align*}
+	E(X)&=E\left(\sum_{i=1}^n X_i\right)\overset{\text{lin.}}=\sum_{i=1}^n E(X_i)=n*p\\
+	V(X)&=V\left(\sum_{i=1}^n X_i\right)\overset{\text{unabh.}}=\sum_{i=1}^n V(X_i)=n*p(1-p)
+\end{align*}

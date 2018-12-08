@@ -1,3 +1,4 @@
+%!TEX root = ../main.tex
 \chapter{Wahrscheinlichkeitsräume}
 
 \section{Allgemeine Definitionen}
@@ -97,7 +98,7 @@ Für zwei Würfel ist der Grundraum $\Omega=\simpleset{1,\ldots,6}^2$ und die Wa
 	Der Erwartungswert einer Zufallsvariablen $X$ auf dem Wahrscheinlichkeitsraum $(\Omega,P)$ ist
 	\begin{align*}
 		E(X)&=\sum_{\omega\in\Omega} X(\omega)*P(\simpleset{\omega})\\
-		&=\sum_{x\in X(\Omega)}x*P(X=x)
+		&=\sum_{\mathclap{x\in X(\Omega)}}x*P(X=x)
 	\end{align*}
 \end{definition}
 
@@ -122,8 +123,89 @@ Für zwei Würfel ist der Grundraum $\Omega=\simpleset{1,\ldots,6}^2$ und die Wa
 	\end{equation*}
 \end{definition}
 
+\begin{satz}{Sätze zur Varianz}
+	Für eine Zufallsvariable $X$ und alle $\alpha,\beta\in\R$ gilt für die Varianz
+	\begin{enumerate}
+		\item $V(\alpha X + \beta) = \alpha^2 V(X)$ (Lineare Transformation)
+		\item $V(X)=E(X^2)-(E(X))^2$ (Verschiebungssatz)
+		\item $V(X)\geq 0$
+		\item $V(X)=0\Leftrightarrow   \exists!a\in\R: P(X=a)=1$
+	\end{enumerate}
+\end{satz}
+
+\paragraph{Beweis:}
+\begin{enumerate}
+	\item Varianz einer linear transformierten Zufallsvariable
+	\begin{align*}
+		V(\alpha X + \beta)&=E[((\alpha X+\beta)-E(\alpha X+\beta))^2]\\
+		&=E[((\alpha X)-\alpha E(X))^2] &\text{(Linearität)}\\
+		&=E[\alpha^2(X-E(X))^2]\\ 
+		&=\alpha^2E[X-E(X)^2]\\
+		V(\alpha X + \beta)&=\alpha^2V(X)
+	\end{align*}
+	\item Beweis des sog. Verschiebungssatzes mit der Linearität des Erwartungswerts
+	\begin{align*}
+		V(X)&=E[(X-E(X))^2]\\
+		&=E[X^2-2X*E(X)+E(X)^2]\\
+		&=E(X^2)-2E(X)*E(E(X))+E(X)^2\\
+		&=E(X^2)-E(X)^2\\
+	\end{align*}
+\end{enumerate}
+
+
+\begin{satz}{Tschebyscheff-Ungleichung}
+	Für eine Zufallsvariable $X$ auf dem Wahrscheinlichkeitsraum $(\Omega,P)$ gilt für alle $\epsilon>0$
+	\begin{equation*}
+		P(|X-E(X)|\geq \epsilon)\leq \frac{V(X)}{\epsilon^2}
+	\end{equation*}
+\end{satz}
+
+\begin{definition}{Bedingte Wahrscheinlichkeit}
+	Auf Basis eines Zufallsexperiments wird die Wahrscheinlichkeit, dass ein Ereignis $B$ eintritt, während zusätzlich ein fest gewähltes Ereignis $A$ eintegtreten ist, \emph{bedingte Wahrscheinlichkeit} bezeichnet. Man interessiert sich also für die Wahrscheinlichkeit des Eregnisses $B$ unter der Bedingung, dass $A$ bereits eingetreten ist. In Zeichen ist die gesuchte Wahrscheinlichkeit
+	\begin{equation*}
+		P(B|A)=P_A(B)\coloneqq\frac{P(B\cap A)}{P(A)}
+	\end{equation*}
+\end{definition}
+
+\subsubsection{Unabhängigkeit}
+\begin{definition}{Unabhängigkeit von Ereignissen}
+	Man nennt zwei Ereignisse $A,B\subset \Omega$ \emph{unabhängig}, wenn
+	\begin{equation*}
+		P(A\cap B)=P(A)*P(B)
+	\end{equation*}
+	gilt.
+\end{definition}
+\paragraph{Bemerkung:}
+\begin{itemize}
+	\item Die Unabhängigkeit von Ereignissen ist offensichtlich eine symmetrische Relation.
+	\item Unabhängigkeit ist nicht mit stochastischer Kausalität zu verwechseln
+	\item Sind zwei Ereignisse unabhängig, dann ist die bedingte Wahrscheinlichkeit gleich der totalen
+	\begin{equation*}
+		P(A|B)=P(A).
+	\end{equation*}
+	\item Sind zwei Ereignisse $A,B$ unvereinbar, das heißt $A\cap B=\emptyset$, sind sie genau dann unabhängig, wenn $P(A)=0$ oder $P(B)=0$ gilt.
+	\item Sind zwei Ereignisse $A,B$ unabhängig, so sind auch deren Komplemente $\overline A, \overline B$ unabhängig.
+\end{itemize}
 
 
 
+{\color{red} UNABHÄNGIGKEIT VON ZV}
 
-%\subsection{Erweiterung auf allgemein diskrete Räume}
+
+\begin{satz}{Erwartungswert bei unabhängigen ZV}
+	Für zwei unabhängige Zufallsvariablen gilt für das Produkt der beiden
+	\begin{equation*}
+		E(X*Y)=E(X)*E(Y)
+	\end{equation*}
+\end{satz}
+\paragraph{Beweis:}
+Für das Produkt zweier unabhängiger Zufallsvariablen ist der Erwartungswert
+\begin{align*}
+	E(X*Y)&=\sum_{\mathclap{z\in(X*Y)(\Omega)}}z*P(X*Y=z)\\
+	&=\sum_{\mathclap{(x,y)\in X(\Omega)\times Y(\Omega)}}xy*P(X=x \wedge Y=x)\\
+	&=\sum_{x\in X(\Omega)}\Big[x*P(X=x) * \sum_{\mathclap{y\in Y(\Omega)}} y*P(Y=y)\Big] &\text{(Unabhängigkeit)}\\
+	&=\sum_{x\in X(\Omega)}x*P(X=x)* \sum_{\mathclap{y\in Y(\Omega)}} y*P(Y=y)\\
+	&=E(X)*E(Y)
+\end{align*}
+
+
