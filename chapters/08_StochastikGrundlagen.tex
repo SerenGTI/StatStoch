@@ -188,8 +188,16 @@ Für zwei Würfel ist der Grundraum $\Omega=\simpleset{1,\ldots,6}^2$ und die Wa
 \end{itemize}
 
 
-
-{\color{red} UNABHÄNGIGKEIT VON ZV}
+\begin{definition}{Unabhängigkeit von Zufallsvariablen}
+	Zwei Zufallsvariablen in einem Wahrscheinlichkeitsraum $(\Omega,P)$ heißen sind unabhängig, wenn 
+	für alle $B_X,B_Y\subseteq \Omega$ gilt
+	\begin{align*}
+		P(X\in B_X\wedge Y\in B_Y)&=P(X\in B_X)*P(Y\in B_Y)\\
+		P(X^{-1}(B_X)\cap Y^{-1}(B_Y))&=P(X^{-1}(B_X))*P(Y^{-1}(B_Y))\\
+	\end{align*}
+\end{definition}
+\paragraph{Bemerkung:}
+Es reicht zwar diese Eigenschaft nur für die einelementigen Teilmengen von $\Omega$ zu zeigen, allerdings entstehen auch damit bereits zu viele Kombinationen.
 
 
 \begin{satz}{Erwartungswert bei unabhängigen ZV}

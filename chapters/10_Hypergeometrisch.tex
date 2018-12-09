@@ -1,2 +1,17 @@
 %!TEX root = ../main.tex
 \subsubsection{Hypergeometrische Verteilung}
+Man betrachtet eine Grundgesamtheit der Größe $N$, in der $M$ Elemente eine gewünschte Eigenschaft besitzen, d.h. einen Treffer darstellen. 
+
+Eine Zufallsvariable die bei einer Stichprobe der Größe $n$ (ohne Zurücklegen) die Anzahl Treffer zählt heißt dann \emph{hypergeometrisch verteilt}, man schreibt $X\sim \operatorname{Hyp}(n,M,N-M)$.
+\begin{equation*}
+ 	P(X=k)=\frac{\binom Mk*\binom{N-M}{n-k}}{\binom Nn}
+\end{equation*}
+Sei $A_j$ das Ereignis, dass die $j$te Kugel die gewünschte Eigenschaft hat.
+Die Zufallsvariable lässt sich also schreiben als
+\begin{equation*}
+	X=\sum_{j=1}^n 1_{A_j}
+\end{equation*}
+Die Wahrscheinlichkeit, für $A_j$ ist $P(A_j)=\frac MN$. Damit ist der Erwartungswert einer hypergeometrisch verteilten Zufallsvariable
+\begin{equation*}
+	E(X)=E\Big(\sum_{j=1}^n 1_{A_j} \Big)=\sum_{j=1}^n E(1_{A_j})=n*\frac MN
+\end{equation*}
