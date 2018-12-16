@@ -1,0 +1,43 @@
+%!TEX root = ../main.tex
+\subsection{Poisson-Verteilung}
+Eine Zufallsvariable $X$, die Ereignisse in einem Zeitintervall zählt, wobei im Mittel $\lambda$ Ereignisse auftreten heißt \emph{Poisson-verteilt} mit Paramter $\lambda$, in Zeichen $X\sim \poisson(\lambda)$.
+
+\paragraph{Herleitung:}
+Die Poisson-Verteilung entsteht als Grenzwert für $n\to\infty$, wenn man das betrachtete Zeitintervall in $n$ Teile der Länge $\sfrac1n$ aufteilt, so dass in jedem Teilintervall genau $1$ oder $0$ Ereignisse auftreten. 
+
+Die Anzahl der Ereignisse $X_n$ im gesamten Intervall ist damit $\binomial(n,\frac\lambda n)$-verteilt. (Hieraus folgt, $E(X_n)=\lambda$.)
+
+Für $X_n$ gilt dann nach der Binomialverteilung
+\begin{align*}
+	P(X_n=k)&={\color{red}\binom nk}* {\color{green}p_n^k}*{\color{blue}(1-p_n)^{n-k}}\\
+	&={\color{red}\frac{n^{\underline k}}{k!}}*{\color{green}\frac{(n*p_n)^k}{n^k}}*{\color{blue}\left(1-\frac{n*p_n}{n}\right)^{-k}*\left(1-\frac{n*p_n}{n}\right)^n}\\
+	&={\color{red}\frac{n^{\underline k}}{k!}}*{\color{green}\frac{\lambda^k}{n^k}}*{\color{blue}\left(1-\frac{\lambda}{n}\right)^{-k}*\left(1-\frac{\lambda}{n}\right)^n}\\
+	&=\frac{\color{green}\lambda^k}{\color{red}k!}*\frac{\color{red}n^{\underline k}}{\color{green}n^k}*{\color{blue}\left(1-\frac{\lambda}{n}\right)^{-k}*\left(1-\frac{\lambda}{n}\right)^n}\\
+\intertext{für $k\to\infty$ folgt}
+P(X_n=k)&=\frac{\color{green}\lambda^k}{\color{red}k!}
+	*\underbrace{\frac{\color{red}n^{\underline k}}{\color{green}n^k}}_{\to1}
+	*\underbrace{\color{blue}\left(1-\frac{\lambda}{n}\right)^{-k}}_{\to1}
+	*\underbrace{\left(1-\frac{\lambda}{n}\right)^n}_{\to e^{-\lambda}}\\
+	&=\frac{\lambda^k}{k!}*e^{-\lambda}
+\end{align*}
+Die Verteilungsfunktion konvergiert damit gegen $1$, denn
+\begin{align*}
+	F^X(k)&=\sum_{i=1}^k \frac{\lambda^i}{i!}*e^{-\lambda}\\
+	\lim_{k\to\infty} F^X(k)&=\sum_{i=1}^\infty \frac{\lambda^i}{i!}*e^{-\lambda}
+	=e^{-\lambda}*\sum_{i=1}^\infty \frac{\lambda^i}{i!}
+	=\frac{e^{\lambda}}{e^{\lambda}}=1.
+\end{align*}
+
+
+\paragraph{Folgerung:}
+\begin{itemize}
+	\item Für die Wahrscheinlichkeiten einer Poissonverteilten Zufallsvariablen gilt
+		\begin{equation*}
+			P(X=i)=\frac{\lambda^i}{i!}*e^{-\lambda}\quad i\in\N_0
+		\end{equation*}
+	\item Die Varianz ist, wie der Erwartungswert $V(X)=E(X)=\lambda$.
+	\item Für zwei unabhängige Zufallsvariablen $X\sim\poisson(\lambda)$ und $Y\sim\poisson(\mu)$ ist
+	\begin{equation*}
+		(X+Y)\sim\poisson(\lambda+\mu)
+	\end{equation*}
+\end{itemize}

@@ -1,0 +1,67 @@
+%!TEX root = ../main.tex
+\subsection{Geometrische Verteilung}
+Wir führen nun unabhängige Bernoulli-Experimente mit Trefferwahrscheinlichkeit $0<p<1$ so oft hintereinander aus, bis ein Erfolg eintritt. Damit ist der Grundraum die Menge
+\begin{equation*}
+	\Omega =\simpleset{\underset{\omega_1}{1},\underset{\omega_2}{01},\underset{\ldots}{001},0001,\ldots}.
+\end{equation*}
+$\Omega$ ist abzählbar unendlich groß. Aufgrund der Unabhängigkeit der einzelnen Experimente ist die Wahrscheinlichkeit für ein Ergebnis
+\begin{equation*}
+	P(\simpleset{\omega_k})=(1-p)^{k-1}*p=q^{k-1}p.
+\end{equation*}
+
+Die Zufallsvariable, die die Anzahl Misserfolge bis zum Erfolg zählt $X(\omega_k)=k-1$ heißt dann \emph{geometrisch verteilt} mit Parameter $p$, in Zeichen $X\sim \geom(p)$.
+
+Es ist also
+\begin{equation*}
+	P(X=k)=q^kp.
+\end{equation*}
+
+Die Verteilungsfunktion an den Stellen $i\in \N$ der geometrisch Verteilten Variable ist
+\begin{equation*}
+	F^X(i)=P(X\leq i) = \sum_{k=0}^i P(X=k)=p*\sum_{k=0}^i q^k=p*\frac{1-q^{i+1}}{1-q}=1-q^{i+1}.
+\end{equation*}
+Und analog gilt für den Erwartungswert
+\begin{equation*}
+ 	E(X)=\sum_{i=0}^\infty i*P(X=i)=\sum_{i=0}^\infty i*q^ip=pq*\sum_{i=0}^\infty i*q^{i-1}\overset{\ref{eGeomZusatz}}=p*q*\frac1{(1-q)^2}=\frac{p*q}{p^2}=\frac qp=\frac1p-1
+\end{equation*} 
+
+Mit der Umformung
+\begin{equation}
+	\sum_{i=0}^\infty i*q^{i-1}=\sum_{i=0}^\infty \frac{\diff}{\diff q} q^k=\frac{\diff}{\diff q} \sum_{i=0}^\infty q^i = \frac{\diff}{\diff q}\frac{1}{1-q}=\frac{1}{(1-q)^2}.\label{eGeomZusatz}
+\end{equation}
+
+
+\paragraph{Beispiel:}
+Wir betrachten ein Spiel mit Sammelbildern (z.B. Fußballspieler aus Hanuta). Die Zufallsvaraible $Y_i$ beschreibt die Anzahl Bilder, die man ziehen muss um seine Sammlung von $i$ Bildern auf $i+1$ zu vergrößern.
+
+Damit ist die Anzahl an Misserfolgen vor dem richtigen Bild geometrisch verteilt
+\begin{equation*}
+	(Y_i-1)\sim \geom\Big(\frac{n-i}{n}\Big)\quad\Rightarrow E(Y_i)=E(Y_i-1)+1=\frac{1}{\frac{n-i}{n}}=\frac{n}{n-i}
+\end{equation*}
+Insgesamt beschreibt die Zufallsvariable $Y$ die benötigten Bilder für eine Sammlung der Größe $n$
+\begin{equation*}
+	Y=\sum_{i=0}^{n-1} Y_i\quad\Rightarrow E(Y)=\sum_{i=0}^{n-1} E(Y_i)=\sum_{i=0}^{n-1} \frac{n}{n-i}=n*\sum_{i=1}^{n}\frac1i\approx n*\ln(n)
+\end{equation*}
+
+Für maximal $63$ mögliche Bilder ist $E(Y)=297.88$ und die Näherung $63\ln(63)=261.01$.
+
+
+\begin{satz}{Gedächtnislosigkeit der geom. Verteilung}
+	Für eine geometrisch verteilte Zufallsvariable $X\sim \geom(\lambda)$ und $x,y\in\N_0$ gilt
+	\begin{equation*}
+		P(X\geq x+y\,|\,X\geq x)=P(X\geq y)
+	\end{equation*}
+	das heißt, $X$ ist gedächtnislos.
+\end{satz}
+\paragraph{Beweis:}
+\begin{align*}
+	P(X\geq x+y\,|\,X\geq x)&=\frac{P(X\geq x+y)\cap P(X\geq x)}{P(X\geq x)}\\
+	&=\frac{P(X\geq x+y)}{P(X\geq x)}\\
+	&=\frac{1-P(X\leq x+y-1)}{1-P(X\leq x-y)}\\
+	&=\frac{1-F^X(x+y-1)}{1-F^X(x-1)}\\
+	&=\frac{q^{x+y}}{q^x}\\
+	&=q^y=P(X\geq y)
+\end{align*}
+
+\paragraph{Bedeutung:}
+Diese Aussage widerspricht der Intuition, dass zum Beispiel beim Würfeln die Wahrscheinlichkeit eine $6$ zu werfen größer werden \emph{muss}, wenn schon lange keine geworfen wurde.

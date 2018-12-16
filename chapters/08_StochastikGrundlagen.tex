@@ -20,22 +20,21 @@
 Für das Urbild eines Ereignisses bezüglich einer Zufallsvariable wird eine Kurzschreibweise definiert. So ist zum Beispiel $\simpleset{3\leq X\leq 4}\coloneqq X^{-1}([3,4])$. Auch eine Schreibweise wie $\simpleset{X=3}\cup\simpleset{X=4}\coloneqq X^{-1}(\simpleset{3,4})$ ist möglich.
 
 
-\section{Diskrete Wahrscheinlichkeitsräume}
+\chapter{Diskrete Wahrscheinlichkeitsräume}
 Einen einfachen Einstieg in die Wahrscheinlichkeitsräume stellen die endlichen Wahrscheinlichkeitsräume dar. Sie sind ein Sonderfall der diskreten Wahrscheinlichkeitsräume.
-\subsection{Endliche Wahrscheinlichkeitsräume}
+\section{Endliche Wahrscheinlichkeitsräume}
 Ein Wahrscheinlichkeitsraum ist endlich, wenn $|\Omega|<\infty$ ist. Man verwendet dann üblicherweise $\mathcal A=\Pot(\Omega)$. Damit ist $\mathcal A$ unter allen Mengenoperationen abgeschlossen und für eine Zufallsvariable $X$ ist $X^{-1}(B)\in\mathcal A$ für alle $B\subseteq\R$.
 
-\begin{definition}{Kolmogorov-Axiome}
-	Einem endlichen Wahrscheinlichkeitsraum $(\Omega, P)$ liegen die folgenden Axiome zugrunde
+\begin{definition}{Endlicher Wahrscheinlichkeitsraum}
+	Das Paar $(\Omega, P)$ ist ein endlicher Wahrscheinlichkeitsraum, wenn gilt
 	\begin{description}
-		\item[\bf K1] $\forall A\subseteq \Omega: P(A)\geq 0$
-		\item[\bf K2] $P(\Omega)=1$
-		\item[\bf K3] $\forall A,B\subseteq \Omega, A\cap B=\emptyset: P(A\cup B)\coloneqq P(A+B)=P(A)+P(B) $
+		\item[\bf EW1] $\forall A\subseteq \Omega: P(A)\geq 0$
+		\item[\bf EW2] $P(\Omega)=1$
+		\item[\bf EW3] $\forall A,B\subseteq \Omega, A\cap B=\emptyset: P(A\cup B)\coloneqq P(A+B)=P(A)+P(B) $
 	\end{description}
 \end{definition}
 
-\begin{satz}{Folgerungen aus dem Axiomensystem}
-	Einige Folgerungen aus den Kolmogorov-Axiomen
+\begin{satz}{Folgerungen aus der Definition}
 	\begin{enumerate}
 		\item $P(\emptyset)=0$
 		\item $P\left(\sum_i A_i\right)=\sum_i P(A_i)$
@@ -58,8 +57,8 @@ Analog ist für $A_2=\simpleset{1,3,5,7}$ die Wahrscheinlichkeit $P(A_2)=\frac12
 	P(A_1\cup A_2)=P(A_1)+P(A_2)-P(A_1\cap A_2)=\frac12+\frac12-\frac38=\frac58.
 \end{equation*}
 
-\subsubsection{Zufallsvariablen auf endlichen Wahrscheinlichkeitsräumen}
-Zufallsvariablen auf endlichen Wahrscheinlichkeitsräumen sind dann Abbildungen $X:\Omega \rightarrow \R$ mit der Verteilung $P^X:\Pot(X(\Omega))\rightarrow \R$ wobei $P^X(B)\coloneqq P(X^{-1}(B))$ für alle $B\subseteq X(\Omega)$ ist.
+\subsection{Zufallsvariablen auf endlichen Wahrscheinlichkeitsräumen}
+Zufallsvariablen auf endlichen Wahrscheinlichkeitsräumen sind dann Abbildungen $X:\Omega \rightarrow \R$ mit der Verteilung $P^X:\Pot(\Omega)\rightarrow \R$ wobei $P^X(B)\coloneqq P(X^{-1}(B))$ für alle $B\subseteq X(\Omega)$ ist.
 \paragraph{Kurzschreibweisen:}
 \begin{itemize}
 	\item Völlig analog zu den bereits eingeführten \hyperref[Kurzschreibweisen1]{Kurzschreibweisen} definieren wir
@@ -167,7 +166,7 @@ Für zwei Würfel ist der Grundraum $\Omega=\simpleset{1,\ldots,6}^2$ und die Wa
 	\end{equation*}
 \end{definition}
 
-\subsubsection{Unabhängigkeit}
+\subsection{Unabhängigkeit in endlichen Wahrscheinlichkeitsräumen}
 \begin{definition}{Unabhängigkeit von Ereignissen}
 	Man nennt zwei Ereignisse $A,B\subset \Omega$ \emph{unabhängig}, wenn
 	\begin{equation*}

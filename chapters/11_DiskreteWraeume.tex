@@ -1,5 +1,5 @@
 %!TEX root = ../main.tex
-\subsection{Erweiterung auf allgemein diskrete Wahrscheinlichkeitsräume}
+\section{Erweiterung auf allgemein diskrete Wahrscheinlichkeitsräume}
 Bisher haben wir endliche Wahrscheinlichkeitsräume betrachtet, das heißt $0<|\Omega|<\infty$. Wir erlauben nun eine Erweiterung auf $0<|\Omega|\leq|\N|$.
 
 \begin{definition}{Diskreter Wahrscheinlichkeitsraum}
@@ -7,18 +7,19 @@ Bisher haben wir endliche Wahrscheinlichkeitsräume betrachtet, das heißt $0<|\
 	\begin{description}
 		\item[Nicht Negativität] $\forall A\subseteq \Omega: P(A)\geq 0$
 		\item[Normiertheit] $P(\Omega)=1$
-		\item[$\sigma$-Additivität] Für alle paarweise disjunkten $A_1,A_2,\ldots\subseteq \Omega $ gilt $P(\sum_{i=1}^\infty A_i)=\sum_{i=1}^\infty P(A_i)$ 
+		\item[$\sigma$-Additivität] Für alle paarweise disjunkten Teilmengen $A_1,A_2,\ldots\subseteq \Omega $ gilt $P(\sum_{i=1}^\infty A_i)=\sum_{i=1}^\infty P(A_i)$ 
 	\end{description}
 	gilt.
 \end{definition}
 
-\paragraph{Konsequenzen aus der Erweiterung}
+\paragraph{Konsequenzen aus der Erweiterung:}
 \begin{itemize}
 	\item Endliche Wahrscheinlichkeitsräume sind Sonderfälle von diskreten Wahrscheinlichkeitsräumen.
 	\item Es gilt wie im endlichen Fall $P(A)=\sum_{\omega\in A}P(\simpleset{\omega})$. Hier kann aber potentiell $A$ unendlich viele Elemente beinhalten, allerdings handelt es sich stets um eine absolut konvergente Reihe.
 	\item Alle Rechenregeln für Wahrscheinlichkeiten gelten weiter.
 	\item Aber $E(X)=\sum_{\omega\in\Omega}X(\omega)*P(\simpleset{\omega})$ ist eventuell eine nicht konvergente Reihe. Der Erwartungswert einer Zufallsvariable ist nur definiert, wenn $\sum_{\omega\in\Omega}|X(\omega)|*P(\simpleset{\omega})<\infty$.
 \end{itemize}
+
 \paragraph{Beispiel:}
 Das sogenannte \emph{Sankt-Petersburg-Paradoxon} behandelt das Problem von nicht existierendem Erwartungswert.
 Es wird eine Münze geworfen bis zum ersten Vorkommen von Zahl im Wurf $k$. Der Grundraum ist also $\Omega=\N$. Damit ist $P(\simpleset{k})=\frac{1}{2^k}$, die Zufallsvariable $X$ beschreibt die Auszahlung in Abhängigkeit von $k$, $X(k)=2^k{k-1}$.
@@ -28,9 +29,3 @@ Die Reihe
 	\sum_{k\in\N}X(k)*P(\simpleset{k})=\sum_{k=0}^\infty \frac12 \rightarrow \infty
 \end{equation*}
 ist divergent - der Erwartungswert $E(X)$ existiert nicht.
-
-\subsubsection{Geometrische Verteilung}
-
-
-
-\subsubsection{Poisson-Verteilung}
