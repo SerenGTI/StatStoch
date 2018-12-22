@@ -1,0 +1,15 @@
+\chapter{Kombinatorik}
+\paragraph{Mit Zurücklegen, mit Betrachtung der Reihenfolge}
+$n$ Möglichkeiten pro Zug, $n^k$ insgesamt
+
+\paragraph{Ohne Zurücklegen, mit Betrachtung der Reihenfolge}
+1. Zug, $n$ Möglichkeiten, 2. Zug, $n-1$ Mögl. k. Zug, $n-k+1$ Möglichkeiten.
+
+$n=\frac{n!}{(n-k)!}=n^{\underline k}$
+
+\paragraph{Ohne Zurücklegen, ohne Betrachtung der Reihenfolge}
+Jede Kombination v.O. erlaubt $k!$ Anordnungen, aus k Zahlen k mal Ziehen ohne Zurücklegen ohne Reihenfolge, $k^{\underline k}=k!$.
+
+Also $\frac{n^{\underline k}}{k!}=\frac{n!}{k!*(n-k)!}=\binom nk$
+
+\paragraph{Mit Zurücklegen, ohne Betrachtung der Reihenfolge}

@@ -1,0 +1,86 @@
+%!TEX root = ../main.tex
+\subsection{Gleichverteilung}
+Die Gleichverteilung ist wahrscheinlich die einfachste stetige Verteilung.
+
+Stellt man sich einen $n$ seitigen Würfel vor und betrachtet dieses Experiment für $n\to\infty$, so verwandelt sich der Würfel immer mehr hin zu einer Kugel. Aussagen über genau einen Punkt auf der Oberfläche machen nun keinen Sinn mehr, stattdessen können Aussagen über Flächen beziehungsweise Intervalle gemacht werden.
+\begin{equation*}
+	P(X=i)\to 0\quad\text{ aber }\quad P(A)=\frac{|A|}{|\Omega|}
+\end{equation*}
+
+Betrachten wir eine Zufallsvariable mit Werten aus $[a,b]=\Omega$ für die gilt
+\begin{equation*}
+	\forall[c,d]\subseteq[a,b]:P([c,d])=\frac{|d-c|}{|b-a|}
+\end{equation*}
+dann nennen wir diese gleichverteilt. Man schreibt dann $X\sim \uniform(a,b)$.
+
+Das heißt eine Zufallsvariable $X$ heißt Gleichverteilt auf dem Intervall $[a,b]\subseteq\R$, wenn für Dichte und Verteilung gilt
+
+
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.7]
+		\draw[->, line width=0.3mm] (0,4) to (6.5,4) node[below] {$x$};
+		\draw[->, line width=0.3mm] (0,4) to (0,7) node[right] {$f^X(x)$};
+		\draw[->, line width=0.3mm] (0,0) to (6.5,0) node[below] {$x$};
+		\draw[->, line width=0.3mm] (0,0) to (0,3) node[right] {$F^X(x)$};
+		
+		\draw[blue, line width=0.5mm] (0,0) -- (1.5,0) -- (4.5,2) -- (6,2);
+		\draw[blue, line width=0.5mm] (0,4) -- (1.5,4);
+		\draw[blue, line width=0.5mm] (1.5,6) -- (4.5,6);
+		\draw[blue, line width=0.5mm] (4.5,4) -- (6,4);
+
+		\draw (0,6) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$\frac{1}{b-a}$}] {};
+		\draw (1.5,4) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$a$}] {};
+		\draw (4.5,4) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$b$}] {};
+		
+		\draw (0,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$0$}] {};
+		\draw (0,2) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$1$}] {};
+		\draw (1.5,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$a$}] {};
+		\draw (4.5,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$b$}] {};
+
+		\draw (1.5,6) node [fill = blue,circle,inner sep = 0pt,minimum size = 4pt] {};
+		\draw (4.5,6) node [fill = blue,circle,inner sep = 0pt,minimum size = 4pt] {};
+
+
+		\draw (-6, 5.5) node {$f^X(x)=
+			\begin{cases}
+				\frac{1}{b-a}&a\leq x\leq b\\
+				0&\text{sonst}
+			\end{cases}$};
+		\draw (-6, 1.5) node {$F^X(x)=
+			\begin{cases}
+				0&x< a\\
+				\frac{x-a}{b-a}&a\leq x\leq b\\
+				1&\text{sonst}
+			\end{cases}$};
+	\end{tikzpicture}	
+\end{center}
+
+% \begin{align*}
+% 	f^X(x)=\begin{cases}
+% 		\frac{1}{b-a}&a\leq x\leq b\\
+% 		0&\text{sonst}
+% 	\end{cases}
+% 	&&F^X(x)=
+% 	\begin{cases}
+% 		0&x< a\\
+% 		\frac{x-a}{b-a}&a\leq x\leq b\\
+% 		1&\text{sonst}
+% 	\end{cases}\\
+% \end{align*}%
+\paragraph{Standard-Gleichverteilt}
+Wie man leicht erkennt, ist der Erwartungswert einer Standard-Gleichverteilten Zufallsvariable $X$
+\begin{equation*}
+	X\sim\uniform(0,1) \quad \rightarrow \quad E(X)=\int_{-\infty}^\infty x*f(x)\intd x=\int_{0}^1 x*f(x)\intd x=\frac 12.
+\end{equation*}
+Und für die Varianz gilt
+\begin{equation*}
+	X\sim\uniform(0,1) \quad \rightarrow \quad V(X)=\int_{-\infty}^\infty (x-\frac12)^1\intd x=\frac13 x^3-\frac12x^2+\frac14 x\,\Big|_0^1=\frac1{12}.
+\end{equation*}
+\paragraph{Erwartungswert und Varianz von gleichverteilten Zufallsvariablen}
+Diese Ergebnisse lassen sich nun aber auch leicht auf andere gleichverteilte Zufallsvariablen übertragen.
+Sei $Y\sim\uniform(a,b)$, dann ist $Y=a+(b-a)X$, damit ist
+\begin{align*}
+	Y\sim\uniform(a,b)\quad\rightarrow\quad E(Y)&=E(a+(b-a)X)=a+(b-a)E(X)=\frac{a+b}{2}\\
+	V(Y)&=V(a+(b-a)X)=(b-a)^2V(X)=\frac{(b-a)^2}{12}
+\end{align*}

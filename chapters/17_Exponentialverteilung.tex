@@ -1,0 +1,36 @@
+%!TEX root = ../main.tex
+
+\subsection{Exponentialverteilung}
+Die Exponentialverteilung stellt das kontinuierliche Äquivalent zur geometrischen Verteilung dar.
+
+Für eine 
+\begin{center}
+	\begin{tikzpicture}[scale=0.7]
+		\draw[->, line width=0.3mm] (0,4) to (6.5,4) node[below] {$x$};
+		\draw[->, line width=0.3mm] (0,4) to (0,7) node[right] {$f^X(x)$};
+		\draw[->, line width=0.3mm] (0,0) to (6.5,0) node[below] {$x$};
+		\draw[->, line width=0.3mm] (0,0) to (0,3) node[right] {$F^X(x)$};
+
+		\draw (0,6) node (eins) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$\lambda$}] {};
+		
+		\draw[line width=0.5mm,blue] (-1,4) -- (0,4);
+		\draw[line width=0.5mm,scale=1,domain=0:6,smooth,variable=\x,blue] plot ({\x},{2*exp(-(2*\x)/3)+4});
+		\draw (0,6) node [fill = blue,circle,inner sep = 0pt,minimum size = 4pt] {};
+
+		\draw[line width=0.5mm,blue] (-1,0) -- (0,0);
+		\draw[line width=0.5mm,scale=1,domain=0:6,smooth,variable=\x,blue] plot ({\x},{2*(1-exp(-(4*\x)/3))});
+		
+		\draw (0,2) node (eins) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$1$}] {};
+
+		\draw (-6, 5.5) node {$f^X(x)=
+			\begin{cases}
+				0&x<0\\
+				\lambda*e^{-\lambda*x}&\text{sonst}
+			\end{cases}$};
+		\draw (-6, 1.5) node {$F^X(x)=
+			\begin{cases}
+				0&x<0\\
+				1-e^{-\lambda*x}&\text{sonst}
+			\end{cases}$};
+	\end{tikzpicture}	
+\end{center}
