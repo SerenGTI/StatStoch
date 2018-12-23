@@ -1,1 +1,99 @@
 %!TEX root = ../main.tex
+\subsection{Normalverteilung}
+Die Normalverteilung wird Verwendet bei Merkmalen,
+\begin{itemize}
+	\item die stetig oder quasi-stetig sind,
+	\item deren Daten um einen Mittelwert streuen,
+	\item deren Daten seltener werden, je größer der Abstand zum Mittelwert.
+\end{itemize}
+
+Eine Zufallsvariable $X$ ist \emph{normalverteilt} mit Paramtern $\mu$ und $\sigma^2$, wenn für ihre Dichte gilt
+\begin{center}
+	\begin{tikzpicture}[scale=0.9]
+		\draw[->, line width=0.3mm] (0,6) to (8.5,6) node[below] {$x$};
+		\draw[->, line width=0.3mm] (0,6) to (0,11) node[right] {$f^X(x)$};
+		\draw[->, line width=0.3mm] (0,0) to (8.5,0) node[below] {$x$};
+		\draw[->, line width=0.3mm] (0,0) to (0,5) node[right] {$F^X(x)$};
+
+		\draw[line width=0.5mm,scale=1,domain=0:8,smooth,variable=\x,blue] plot ({\x},{4*exp(-(\x-4)*(\x-4)/2.7)+6.05});
+
+
+		\draw[line width=0.5mm,scale=1,domain=0:4,smooth,variable=\x,blue] plot ({\x},{2*exp((\x-4)/1.3)});
+		\draw[line width=0.5mm,scale=1,domain=4:8,smooth,variable=\x,blue] plot ({\x},{-2*exp(-(\x-4)/1.3)+4});
+
+
+
+		\draw (4,2) node (Fmu) [fill = white,circle,inner sep = 0pt,minimum size = 4pt,draw] {};
+		\draw (4,10.04) node (fmu) [fill = white,circle,inner sep = 0pt,minimum size = 4pt,draw] {};
+
+		\draw (5.3,8.2) node (fmu+) [fill = white,circle,inner sep = 0pt,minimum size = 4pt,draw] {};
+		\draw (2.7,8.2) node (fmu-) [fill = white,circle,inner sep = 0pt,minimum size = 4pt,draw] {};
+
+		\draw (5.3,6) node (muf+) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$\mu+\sigma$}] {};
+		\draw (2.7,6) node (muf-) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$\mu-\sigma$}] {};
+
+		
+
+		\draw (4,6) node (muf) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$\mu$}] {};
+		\draw (4,0) node (muF) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$\mu$}] {};
+
+		
+		\draw (0,0) node (null) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$0$}] {};
+		\draw (0,4) node (eins) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$1$}] {};
+		\draw (0,2) node (einhalb) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$\frac12$}] {};
+		\draw[dotted, gray] (eins) -- (8, 4);
+
+
+		\draw[red, line width=0.3mm, dashed] (muF) -- (Fmu) -- (einhalb);
+		\draw[red, line width=0.3mm, dashed] (muf) -- (fmu);
+		
+		\draw[green, line width=0.3mm, dashed] (fmu+) -- (muf+);
+		\draw[green, line width=0.3mm, dashed] (fmu-) -- (muf-);
+			
+
+		\draw (-4, 8.5) node {$\displaystyle f^X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}*\exp\left(\frac{-(x-\mu)^2}{2\sigma^2}\right)$};
+	\end{tikzpicture}	
+\end{center}
+Wir schreiben dann $X\sim\norm(\mu,\sigma^2)$.
+\paragraph{Eigenschaften:}
+\begin{itemize}
+	\item $f$ ist symmetrisch zum Mittelwert $\mu$.
+	\item Der Erwartungswert von $X$ ist der Mittelwert, d.h. $E(X)=\mu$. Die Lage der Dichtefunktion wird durch $\mu$ bestimmt.
+	\item Für die Dichtefunktion gilt $\int_{-\infty}^{\infty} f^X(t)\intd t = 1$.
+	\item Für die Varianz gilt $V(X)=\sigma^2$. Der zweite Parameter der Normalverteilung gibt also die Breite der Dichtefunktion an.
+	\item Die Dichtefunktion hat ihre Wendepunkte bei $\mu\pm\sigma$.
+	\item Die Verteilung $F^X(x)=\int_{-\infty}^{x} f^X(t)\intd t$ hat keine geschlossene Form und ist daher teuer/ aufwändig zu berechnen. Man verwendet daher oft die \emph{Standardnormalverteilung} um Werte zu berechnen.
+	\item {\bf Transformiert} man eine normalverteilte Zufallsvariable $X\sim\norm(\mu,\sigma^2)$, zu $Y=aX+b$, dann ist $Y$ wiederum normalverteilt mit $Y\sim\norm(a\mu+b, a^2\sigma^2)$.
+	\item Für zwei \emph{unabhängige} Zufallsvariablen $X\sim\norm(\mu_x,\sigma_x^2)$ und $ Y\sim\norm(\mu_y,\sigma_y^2)$ ist die {\bf Summe} der beiden wieder normalverteilt, $(X+Y)\sim\norm(\mu_x+\mu_y,\sigma_x+\sigma_y)$.
+\end{itemize}
+
+\subsubsection{Standardnormalverteilung}
+Eine Zufallsvariable $Z$ ist Standard-normalverteilt, wenn $Z\sim\norm(0,1)$.
+Ihre Dichte ist dann gegeben als
+\begin{equation*}
+	\varphi(x)=\frac{1}{\sqrt{2\pi}}*e^{-\frac12x^2}
+\end{equation*}
+
+Dann ist $E(Z)=0$ und $V(Z)=1$. Eine allgemeine normalverteilte Zufallsvariable $X\sim\norm(\mu,\sigma)$ lässt sich damit einfach wie folgt auf $Z$ reduzieren
+\begin{equation*}
+	X\sim\norm(\mu, \sigma)\Rightarrow Z:\frac{X-\mu}{\sigma}\sim\norm{0,1}
+\end{equation*}
+Damit folgt dann
+\begin{enumerate}
+	\item Tabellieren von $\Phi(x)=\int_{-\infty}^x \varphi(t)\intd t$ reicht aus um die Verteilungsfunktion einer beliebig parametrisierten Normalverteilung zu berechnen.
+	\begin{align*}
+		F^X(X)&=P(X\leq x)\\
+		&=P\left(\frac{X-\mu}{\sigma}\leq \frac{x-\mu}{\sigma}\right)\\
+		&=P\left(Z\leq\frac{x-\mu}{\sigma}\right)\\
+		&=\Phi\left(\frac{x-\mu}{\sigma}\right)
+	\end{align*}
+	\item Analog ist $X=\mu+\sigma Z$, damit sind dann Varianz und Erwartungswert
+	\begin{align*}
+		E(X)&=E(\mu+\sigma Z)=\mu\\
+		V(X)&=V(\mu+\sigma Z)=\sigma^2
+	\end{align*}
+\end{enumerate}
+
+
+
+%\subsubsection{Quantile der Normalverteilung}

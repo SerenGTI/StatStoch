@@ -3,7 +3,7 @@
 \subsection{Exponentialverteilung}
 Die Exponentialverteilung stellt das kontinuierliche Äquivalent zur geometrischen Verteilung dar.
 
-Für eine 
+Eine Zufallsvariable $X$ heißt \emph{exponentialverteilt} mit Parameter $\lambda$,  wenn für Dichte und Verteilung gilt
 \begin{center}
 	\begin{tikzpicture}[scale=0.7]
 		\draw[->, line width=0.3mm] (0,4) to (6.5,4) node[below] {$x$};
@@ -32,5 +32,27 @@ Für eine
 				0&x<0\\
 				1-e^{-\lambda*x}&\text{sonst}
 			\end{cases}$};
-	\end{tikzpicture}	
-\end{center}
+	\end{tikzpicture}%	
+\end{center}%
+Man schreibt dann $X\sim\expo(\lambda)$.
+
+\paragraph{Erwartungswert und Varianz}
+Für eine Zufallsvariable $Y\sim\expo(1)$ ist $E(Y)=V(Y)=1$. Damit lässt sich der allgemeine Fall einfach berechnen
+\begin{align*}
+	X\sim\expo(\lambda)\quad\rightarrow\quad E(X)&=E\left(\frac Y\lambda\right)= \frac1\lambda\\
+	V(X)&=V\left(\frac Y\lambda\right)=\frac{1}{\lambda^2}.
+\end{align*}
+\begin{satz}{Gedächtnislosigkeit der Exponentialverteilung}
+	Für eine exponentialverteilte Zufallsvariable $X\sim \expo(\lambda)$ und $x,y\in\R$ gilt
+	\begin{equation*}
+		P(X\geq x+y\,|\,X\geq x)=P(X\geq y)
+	\end{equation*}
+	das heißt, $X$ ist gedächtnislos. Dies ist analog zur geometrischen Verteilung.
+\end{satz}
+\paragraph{Beweis:}
+\begin{align*}
+	P(X\geq x+y\,|\,X\geq x)&=\frac{P(X\geq x+y\wedge X\geq x)}{P(X\geq x)}=\frac{P(X\geq x+y)}{P(X\geq x)}\\
+	&=\frac{1-F^X(x+y)}{1-F^X(x)}\\
+	&=\exp(-\lambda(x+y)-(-\lambda x))=\exp(-\lambda y)\\
+	&=1-F^X(y)=P(X\geq y)
+\end{align*}

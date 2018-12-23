@@ -13,7 +13,7 @@ Betrachten wir eine Zufallsvariable mit Werten aus $[a,b]=\Omega$ für die gilt
 \end{equation*}
 dann nennen wir diese gleichverteilt. Man schreibt dann $X\sim \uniform(a,b)$.
 
-Das heißt eine Zufallsvariable $X$ heißt Gleichverteilt auf dem Intervall $[a,b]\subseteq\R$, wenn für Dichte und Verteilung gilt
+Das heißt eine Zufallsvariable $X$ heißt \emph{gleichverteilt} auf dem Intervall $[a,b]\subseteq\R$, wenn für Dichte und Verteilung gilt
 
 
 
@@ -68,7 +68,7 @@ Das heißt eine Zufallsvariable $X$ heißt Gleichverteilt auf dem Intervall $[a,
 % 		1&\text{sonst}
 % 	\end{cases}\\
 % \end{align*}%
-\paragraph{Standard-Gleichverteilt}
+\paragraph{Erwartungswert und Varianz}
 Wie man leicht erkennt, ist der Erwartungswert einer Standard-Gleichverteilten Zufallsvariable $X$
 \begin{equation*}
 	X\sim\uniform(0,1) \quad \rightarrow \quad E(X)=\int_{-\infty}^\infty x*f(x)\intd x=\int_{0}^1 x*f(x)\intd x=\frac 12.
@@ -77,8 +77,7 @@ Und für die Varianz gilt
 \begin{equation*}
 	X\sim\uniform(0,1) \quad \rightarrow \quad V(X)=\int_{-\infty}^\infty (x-\frac12)^1\intd x=\frac13 x^3-\frac12x^2+\frac14 x\,\Big|_0^1=\frac1{12}.
 \end{equation*}
-\paragraph{Erwartungswert und Varianz von gleichverteilten Zufallsvariablen}
-Diese Ergebnisse lassen sich nun aber auch leicht auf andere gleichverteilte Zufallsvariablen übertragen.
+Diese Ergebnisse lassen sich nun aber auch leicht auf den allgemeinen Fall einer gleichverteilten Zufallsvariablen übertragen.
 Sei $Y\sim\uniform(a,b)$, dann ist $Y=a+(b-a)X$, damit ist
 \begin{align*}
 	Y\sim\uniform(a,b)\quad\rightarrow\quad E(Y)&=E(a+(b-a)X)=a+(b-a)E(X)=\frac{a+b}{2}\\
