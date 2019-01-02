@@ -1,0 +1,64 @@
+%!TEX root = ../main.tex
+\chapter{Zusammenhang von Zufallsvariablen}
+\section{Kovarianz}
+Für diskrete Zufallsvariablen wurde die Unabhängigkeit von Zufallsvariablen definiert als
+\begin{equation*}
+	P(X=x,Y=y)=P(X=x)*P(Y=y)\quad\forall x,y\in\Omega.
+\end{equation*}
+
+Allerdings macht es auch Sinn für abhängige Zufallsvariablen zu untersuchen, wie sich die Abhängigkeit ausprägt.
+
+\begin{definition}{Kovarianz}
+	Die Kovarianz von zwei Zufallsvariablen $X$ und $Y$ ist
+	\begin{align*}
+		\cov(X,Y)&\coloneqq E[(X-E(X))*(Y-E(Y))]\\
+		\text{(diskret)}\enspace&=\sum_i\sum_j (x_i-E(X))(y_j-E(Y))*f(x_i,y_j)\\
+		\text{(stetig)}\enspace&=\int_{-\infty}^\infty\int_{-\infty}^\infty (x-E(X))(y-E(Y))*f(x,y)\intd y\intd x
+	\end{align*}
+\end{definition}
+\begin{itemize}
+	\item $\cov(X,Y)$ ist groß, wenn $X$ und $Y$ gleichförmig von den jeweiligen Erwartungswerten abweichen.
+	\item Die Kovarianz ist negativ bei gegenläufiger Abweichung.
+	\item Ist $\cov(X,Y)\approx 0$, so besteht keine besondere Wirkungsbeziehung zwischen den Variablen.
+\end{itemize}
+
+\begin{satz}{Eigenschaften der Kovarianz}%
+	\begin{enumerate}%
+		\item Die Kovarianz ist symmetrisch, 
+		\begin{equation*}
+			\cov(X,Y)=\cov(Y,X).
+		\end{equation*}
+		\item Es gilt der Verschiebungssatz
+		\begin{equation*}
+			\cov(X,Y)=E(X*Y)-E(X)*E(Y)
+		\end{equation*}
+		Hieraus wird klar, dass wenn Variablen unabhängig sind, dann ihre Kovarianz immer $0$ ist. Ist eine Kovarianz $0$ hat das zunächst keine Aussage über die Unabhängigkeit.
+		\item Die Kovarianz ist extrem maßstabsabhängig. Für linear transformierte $X$ und $Y$ ist
+		\begin{equation*}
+			\cov(aX+b,cY+d)=a*c*\cov(X,Y).
+		\end{equation*}
+		\item Für die Varianz der Addition zweier Zufallsvariablen gilt außerdem
+		\begin{equation*}
+			V(X+Y)=V(X)+V(Y)+2\cov(X,Y).
+		\end{equation*}
+	\end{enumerate}
+\end{satz}
+\paragraph{Beweis:}
+\begin{enumerate}
+	\item Ergibt sich direkt aus dem Erwartungswert.
+	\item Lässt sich leicht durch Ausmultiplizieren sehen
+	\begin{align*}%
+		\cov(X,Y)&=E[(E-E(X))*(Y-E(Y))]\\
+		&=E[X*Y-E(Y)*X-Y*E(X)+E(X)*E(Y)]\\
+		&=E(X*Y)-E(X)*E(Y)
+	\end{align*}
+\end{enumerate}
+
+\section{Korrelationskoeffizient}
+Der Korrelationskoeffizient stellt ein maßstabsunabhängiges Zusammenhangsmaß dar.
+\begin{equation*}
+	\rho(X,Y)=\frac{\cov(X,Y)}{\sqrt{V(X)*V(Y)}}=\frac{\cov(X,Y)}{\sigma_X*\sigma_Y}
+\end{equation*}
+\begin{itemize}
+	\item $-1\leq\rho\leq1$
+\end{itemize}

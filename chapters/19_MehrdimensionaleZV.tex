@@ -1,1 +1,108 @@
 %!TEX root = ../main.tex
+\chapter{Mehrdimensionale Zufallsvariablen}
+\section{Diskrete Zufallsvariablen}
+\begin{definition}{Mehrdimensionale diskrete Zufallsvariablen}
+	Eine \emph{mehrdimensionale Zufallsvariable} auf einem diskreten Wahrscheinlichkeitsraum $(\Omega,P)$ lässt sich schreiben als die Abbildung
+	\begin{equation*}
+		(X_1,X_2,\ldots,X_n):\Omega\rightarrow \R^n, \omega\mapsto (X_1(\omega),X_2(\omega),\ldots,X_n(\omega))
+	\end{equation*}
+	wobei die $X_i$ einzelne (eindimensionale) Zufallsvariablen sind.
+
+	Die \emph{gemeinsame Verteilung} der $X_i$ ist dann
+	\begin{equation*}
+		P(X_1\in B_1,X_2\in B_2, \ldots, X_n\in B_n) \quad B_i\in\Omega.
+	\end{equation*}
+\end{definition}
+
+Wir betrachten nun den zweidimensionalen Fall.
+
+Sei der Grundraum $\Omega=\simpleset{x_1,x_2,\ldots}\times\simpleset{y_1,y_2,\ldots}$.
+Damit ist die gemeinsame Verteilung der Zufallsvariablen $X$ und $Y$
+\begin{equation*} 
+	f(x_i,y_j)=\begin{cases}
+	P(X=x_i,Y=y_j)&(x_i,y_j)\in\Omega\\
+	0&\text{sonst}
+	\end{cases}
+\end{equation*}
+
+Sind $X$ und $Y$ aus einem endlichen Wahrscheinlichkeitsraum, so kann man die Kontingenztafel der Wahrscheinlichkeiten (vgl. Kontingenztafel der Häufigkeiten \autoref{kontingenztafel}) schreiben als
+\begin{center}
+	\begin{tabular}{r|ccccc|l}
+		&$y_1$&$y_2$&$y_3$&$\cdots$&$y_m$&\\\hline
+		$x_1$&$p_{11}$&$p_{12}$&$p_{13}$&$\cdots$&$p_{1m}$&$p_{1\cdot}$\\
+		$x_2$&$p_{21}$&$p_{22}$&&$\ddots$&&\\
+		$x_3$&$p_{31}$&&$\ddots$&&$\vdots$&\\
+		$\vdots$&$\vdots$&$\ddots$&&&&\\
+		$x_n$&$p_{n1}$&&$\cdots$&&$p_{nm}$&$p_{n\cdot}$\\\hline
+		&$p_{\cdot1}$&&&&$p_{\cdot m}$&$1$
+	\end{tabular}
+\end{center}
+dabei seien die Einträge
+\begin{equation*}
+	p_{ij}\coloneqq f(x_i,y_j)
+\end{equation*}
+
+Die daraus hervorgehende Randverteilung von $X$ beziehungsweise $Y$ ist
+\begin{align*}
+	f_X(x_i)&=P(X=x_i)=\sum_{j=1}^m P(X=x_i, Y=y_j)=\sum_{j=1}^m p_{ij}=p_{i\cdot}\\
+	f_Y(y_i)&=P(Y=y_i)=\sum_{j=1}^n P(X=x_j, Y=y_i)=\sum_{j=1}^n p_{ji}=p_{\cdot i}.
+\end{align*}
+
+Und die bedingte Wahrscheinlichkeitsfunktion von $X$ bei gegebenem Ereginis $y$ ist
+\begin{equation*}
+	f_X(x\,|\,y)=\frac{f(x,y)}{f_Y(y)}
+\end{equation*}
+
+\paragraph{Beispiel:}
+Wir betrachten das Ergebnis vom Werfen eines Würfels und die Zufallsvariablen mit Werten
+\begin{align*}
+	X=\begin{cases}
+	\text{gerade}\\
+	\text{ungerade}
+	\end{cases}&&
+	Y=\begin{cases}
+	\text{Primzahl}\\
+	\text{nicht Prim}
+	\end{cases}
+\end{align*}
+dabei versteht sich selbst wann die Zufallsvariablen die jeweiligen Werte annehmen.
+
+Die Wahrscheinlichkeit, dass das Würfelergebnis ungerade und eine Primzahl ist, ist die gemeinsame Wahrscheinlichkeit
+\begin{equation*}
+	f(\text{ungerade}, \text{Primzahl})=P(X=\text{ungerade},Y=\text{Primzahl})=P(\simpleset{3,5})=\frac13.
+\end{equation*}
+
+Da dieses Experiment endlich ist, schreiben wir die Kontingenztafel
+\renewcommand{\arraystretch}{1.4}
+\begin{center}
+	\begin{tabular}{r|cc|l}
+		&Prim&nicht Prim&\\\hline
+		gerade&$\frac16$&$\frac26$&$\frac12$\\
+		ungerade&$\frac26$&$\frac16$&$\frac12$\\\hline
+		&$\frac12$&$\frac12$&$1$\\
+	\end{tabular}
+\end{center}
+
+Wir betrachten damit die bedingte Wahrscheinlichkeit von $X$ unter der Bedinung $Y=\text{nicht Prim}$
+\begin{equation*}
+	f_X(x|\text{nicht Prim})=\begin{cases}
+		\frac{\sfrac26}{\sfrac12}=\frac23&x=\text{gerade}\\
+		\frac{\sfrac16}{\sfrac12}=\frac13&x=\text{ungerade}\\
+	\end{cases}
+\end{equation*}
+
+\section{Stetige Zufallsvariablen}
+Bei stetigen Zufallsvariablen müssen einige Eigenschaften gelten
+\begin{itemize}
+	\item Eine Normalisierungsbedinung
+	\begin{equation*}
+		\int_{\Omega}f(x,y)\intd\,(x,y)=1
+	\end{equation*}
+	\item Die Dichtefunktionen müssen stückweise glatt sein.
+	\item Die Randdichte von $X$ ist
+	\begin{equation*}
+		f_X(x)=\int_{-\infty}^\infty f(x,y)\intd y
+	\end{equation*}
+\end{itemize}
+
+

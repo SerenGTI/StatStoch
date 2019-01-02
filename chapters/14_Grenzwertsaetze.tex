@@ -1,2 +1,50 @@
 %!TEX root = ../main.tex
 \section{Grenzwertsätze}
+Wollen wir ein Experiment oft wiederholen, erhalten wir eine Folge von unabhängigen Zufallsvariablen $(X_i)_{i\in\N}$.
+
+Wird dieses Experiement durch die Zufallsvariable $X$ auf einem diskreten Wahrscheinlichkeitsraum $(\Omega,P)$ beschrieben, so stellt sich die Frage was der Grundraum der Folge von $X_i$ ist.
+\begin{equation*}
+	(\Omega^n,P^{(n)}) \text{ mit } P^{(n)}(\simpleset{(\omega_1,\omega_2,\ldots,\omega_n)})\overset{\text{unabh.}}=\prod_{i=1}^n P(\simpleset{\omega_i})
+\end{equation*}
+Wobei die $X_i(\omega)=X(\omega_i)$ wie $X$ verteilt und unabhängig sind.
+
+Das Problem ist der Grundraum dieser Folge, das unendliche kartesische Produkt ist überabzählbar, es handelt sich nicht mehr um einen diskreten Wahrscheinlichkeitsraum. 
+
+
+ 
+
+
+\begin{satz}{Schwaches Gesetz der großen Zahlen}
+	Sei $(\Omega, P)$ ein diskreter Wahrscheinlichkeitsraum und $X_1,X_2,\ldots$ eine Folge unabhängiger Zufallsvariablen auf $\Omega$.
+
+	Gelte weiter für alle diese Zufallsvariablen, dass ihr Erwartungswert und ihre Varianz gleich sind
+	\begin{align*}
+		\mu &= E(X_1)=E(X_2)=\ldots\\
+		\sigma^2&=V(X_1)=V(X_2)=\ldots\\
+	\end{align*}%
+	Bildet man nun das arithmetische Mittel $M_n$ über die ersten $n$ Zufallsvariablen%
+	\begin{equation*}
+		M_n\coloneqq \frac1n\sum_{i=1}^nX_i
+	\end{equation*}%
+	dann gilt für $\epsilon > 0$%
+	\begin{equation*}
+		\lim_{n\to\infty}P(|M_n-\mu|\geq\epsilon)=0.
+	\end{equation*}%
+\end{satz}
+
+Das bedeutet für große Werte $n$ konvergiert das tatsächlich errechnete Mittel $M_n$ gegen den Mittelwert des Experiments $\mu$. Man kann also (unendlich) große Folgen von Zufallsvariablen mit einer genügend großen Anzahl von Wiederholungen approximieren.
+
+
+
+
+
+\subsection{Binomialverteilung im Grenzwert}
+
+
+Betrachten wir nun das Verhalten der Binomialverteilung für große $n$
+\begin{satz}{Zentraler Grenzwertsatz}
+	Sei $S_n\sim\binomial(n,p)$ mit festem $0<p<1$ und $q=1-p$, dann gilt für
+	\begin{equation*}
+		S_n^\ast =\frac{S_n-np}{\sqrt{npq}}
+	\end{equation*}
+\end{satz}
