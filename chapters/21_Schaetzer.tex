@@ -1,0 +1,100 @@
+%!TEX root = ../main.tex
+\chapter{Schätzer}
+\section{Allgemeines zum Schätzen}
+Beim Schätzen wollen wir von einer Beobachtung einer (teilweise) unbekannten Verteilung auf Parameter der Verteilung schließen.
+
+Das kann bedeuten, dass man versucht aus einer Stichprobe zu folgern, ob es sich zum Beispiel um eine Normalverteilung handelt.
+Aber ebenso kann man zum Beispiel den Parameter $\mu$ der Normalverteilung schätzen.
+
+Man sieht sofort dass man beim Schätzen einige Angaben entweder wissen oder Annahmen treffen muss.
+Selbstverständlich kann man nur Parameter einer Verteilung schätzen wenn man annimmt dass es sich um diese Verteilung handelt.
+
+Es gibt verschiede Arten zu Schätzen, so kann man beispielsweise einen Bereich angeben in dem sich der Parameter mit einer gewissen Sicherheit befindet (Lage- oder Intervallschätzer).
+
+
+
+
+\section{Intervallschätzer}
+
+
+Konfidenzintervalle
+\subsection{Mit Tschebyscheff-Ungleichung}
+
+\subsection{Über die Verteilungsfunktion}
+
+
+
+
+
+\section{Maximum-Likelihood-Schätzer}
+Die Maximum-Likelihood-Schätzmethode verwendet eine sogenannte Likelihoodfunktion $L$. Diese ist abhängig vom zu schätzenden Parameter $\alpha$, man sucht dann den Wert für $\alpha$ so, dass $L(\alpha)$ ein Maximum annimmt. Häufig wird dieser Wert mit einem Dach gekennzeichnet. 
+
+Das Ergebnis dieses Schätzers wäre also allgemein
+\begin{equation*}
+	\hat\alpha = \underset\alpha\argmax L(\alpha)
+\end{equation*}
+
+Hierbei hängt die Likelihoodfunktion davon ab, was bei welcher Verteilung geschätzt wird. 
+
+
+Wir wollen den Maximum-Likelihood-Schätzer anhand der Binomialverteilung betrachten.
+Hierbei macht nur Schätzen des Parameters $p$ Sinn, denn selbst wenn nur eine einzige Stichprobe vorliegt, sieht man sofort welchen Wert $n$ hat.
+
+Es liegt also eine Verteilung 
+\begin{equation*}
+	X\sim\binomial(n,p)
+\end{equation*}
+zugrunde, hierbei ist $n$ bekannt und fest, $p\in(0,1)$ wollen wir herausfinden.
+
+Liegt uns nun eine Stichprobe $\omega$ vor, so ist auch $X(\omega)=k$ bekannt als die Anzahl Treffer in den $n$ Bernoulli-Experimenten.
+
+Zum Schätzen fehlt uns noch die Likelihoodfunktion, diese ist hier
+\begin{equation*}
+	L:(0,1)\rightarrow[0,1], \enspace L(p)=P_p(X=k)=\binom{n}{k}*p^k(1-p)^{n-k}
+\end{equation*}
+
+Das heißt, es ist die Wahrscheinlichkeit dass $X$ mit Trefferwahrscheinlichkeit $p$ (als Parameter!) den Wert $k$ annimmt. Man sieht, dass diese Funktion ihr Maximum bei dem Wert für $p$ annimmt, unter dem es am wahrscheinlichsten ist, die Stichprobe $\omega$ zu erhalten.
+
+Den Wert $\hat p$ zu berechnen würde hier durch Ableiten und anschließendem Bestimmen der Nullstelle erfolgen
+\begin{equation*}
+	\frac{\diff}{\diff p}L(\hat p)\overset!= 0.
+\end{equation*}
+
+\paragraph{Beispiel:}
+Wir wollen dies nun nochmal an einem Beispiel veranschaulichen. Wir schätzen wiederum $p$ einer Binomialverteilung, schließen damit später aber auf einen anderen Wert.
+\begin{eBox}{}{}
+	Um die Populationsgröße $N$ einer Fischart in einem See zu schätzen, gehen wir folgendermaßen vor: Wir markieren von dieser Art $m=50$ Fische in einem See, fangen später $n=200$ Stück und stellen fest, dass $k=16$ davon markiert sind.
+
+	Wir nehmen an, dass das Untersuchen der Stichprobe auf Markierungen eine Folge von $n$ unabhängigen Bernoulli-Experimenten mit Trefferwahrscheinlichkeit $p=\frac mN$ ist. Also beschreibt $p$ den Anteil der markierten Fische im See.
+\end{eBox}
+Wir verwenden die zuvor besprochene Likelihoodfunktion $L(p)$, denn mit $p=\frac mN$ können wir auf $N$ schließen. 
+
+Sei $X$ eine Zufallsvariable die die Anzahl markierter Fische in der Stichprobe beschreibt, damit ist $X \sim \binomial(200,p)$ verteilt. 
+
+Die Likelihoodfunktion ist mit diesen Werten
+\begin{equation*}
+	L(p)=P_p(X=k)=\binom{200}{k}* p^{k}(1-p)^{200-k}
+\end{equation*}
+Damit folgt
+\begin{align*}
+	\frac{\diff}{\diff p}L(p) &= \binom{200}{k}*\left[ k*p^{k-1}(1-p)^{200-k} - p^k*(200-k)*(1-p)^{200-k-1}\right]\\
+	&=\underbrace{\binom{200}{16}* p^{k-1}(1-p)^{200-k-1}}_{>0} * \left[ k(1-p)-200p+kp \right]\\
+\end{align*}
+Da wir uns für Nullstellen interessieren, betrachten wir nur noch den rechten Teil und erhalten
+\begin{align*}
+	k(1-\hat p)-200\hat p+k\hat p&\overset != 0\\
+	k-k\hat p-200\hat p+k\hat p &= 0\\
+	k-200\hat p&=0
+\end{align*}
+Für unsere Stichprobe $\omega$ ist $X(\omega)=k=16$, damit ist
+\begin{align*}
+	\hat p =\frac{m}{N} =\frac k{200}\Rightarrow N&=\frac {m*200}{k}\\
+	\Rightarrow N &= \frac{50*200}{16} = 625
+\end{align*}
+
+Wir haben damit die Populationsgröße der Fischart auf 625 geschätzt.
+
+\section{Kleinste Quadrate-Schätzer}
+
+
+\section{Bayes-Schätzer}
