@@ -15,9 +15,10 @@ Es gibt verschiede Arten zu Schätzen, so kann man beispielsweise einen Bereich 
 
 
 \section{Intervallschätzer}
+Die Intervallschätzer geben ein Intervall an, in dem sich der zu schätzende Parameter höchstwahrscheinlich befindet. Hierbei sind möglichst kleine Intervalle bei einer hohen Sicherheit natürlich gewünscht, aber diese Einschränkungen widersprechen sich. 
+Verkleinert man das Intervall wird die Sicherheit, dass der geschätze Parameter wirklich enthalten ist im Allgemeinen kleiner.
 
 
-Konfidenzintervalle
 \subsection{Mit Tschebyscheff-Ungleichung}
 
 \subsection{Über die Verteilungsfunktion}
@@ -54,7 +55,28 @@ Zum Schätzen fehlt uns noch die Likelihoodfunktion, diese ist hier
 \end{equation*}
 
 Das heißt, es ist die Wahrscheinlichkeit dass $X$ mit Trefferwahrscheinlichkeit $p$ (als Parameter!) den Wert $k$ annimmt. Man sieht, dass diese Funktion ihr Maximum bei dem Wert für $p$ annimmt, unter dem es am wahrscheinlichsten ist, die Stichprobe $\omega$ zu erhalten.
+\begin{center}
+	\begin{tikzpicture}[scale=0.6]
+		\draw[->, line width=0.3mm] (0,0) to (8.5,0) node[below] {$p$};
+		\draw[->, line width=0.3mm] (0,0) to (0,5) node[right] {$L(p)$};
 
+		\draw[line width=0.5mm,scale=8,domain=0:1,smooth,variable=\x,blue, samples=100] plot ({\x},{5*\x * ((1-\x)^(4))});
+
+
+		%\draw[line width=0.5mm,scale=8,domain=0.001:1,smooth,variable=\x,green, samples=100] plot ({\x},{0.15*(5*(1-\x)^4-20*\x*(1-\x)^3)});	
+
+		\draw (1.6,0) node (hatp) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$\hat p$}] {};
+		\draw (1.6,3.27) node (Lhatp) [fill = white,circle,inner sep = 0pt,minimum size = 4pt,draw] {};
+
+		
+		\draw (0,0) node (null) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$0$}] {};
+		\draw (8,0) node (eins) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$1$}] {};
+		
+
+		\draw[red, line width=0.3mm, dashed] (hatp) -- (Lhatp);
+			
+	\end{tikzpicture}	
+\end{center}
 Den Wert $\hat p$ zu berechnen würde hier durch Ableiten und anschließendem Bestimmen der Nullstelle erfolgen
 \begin{equation*}
 	\frac{\diff}{\diff p}L(\hat p)\overset!= 0.
@@ -94,7 +116,59 @@ Für unsere Stichprobe $\omega$ ist $X(\omega)=k=16$, damit ist
 
 Wir haben damit die Populationsgröße der Fischart auf 625 geschätzt.
 
+
+
+
+
 \section{Kleinste Quadrate-Schätzer}
 
 
+
 \section{Bayes-Schätzer}
+
+
+
+Wir betrachten die Zufallsvariable $X$ mit dem zugehörigen Wahrscheinlichkeitsraum $(X(\Omega), P_\theta)$. Hierbei wollen wir den Parameter $\theta$ schätzen. 
+
+Der Bayes-Schätzer stellt eine komplett andere Herangehensweise an das Schätzen dar, hier wird der gesuchte Parameter als eine Zufallsvariable aufgefasst. So können weitere Annahmen wie Erfahrung aus anderen Experimenten oder ein grobes Vorwissen über den Sachverhalt in den Schätzvorgang eingehen.
+
+Achtung, die Werte der Zufallsvariable $\theta$ werden ebenfalls $\theta$ genannt.
+\begin{enumerate}
+	\item 
+	Wir betrachten also zunächst die gemeinsame Dichte $f(x,\theta)$ wobei $x\in X(\Omega)$ und $\theta\in \Theta\subseteq[0,1]$. 
+
+	Der einfachere Fall ist hierbei, wenn es sich sowohl bei $X$ als auch $\theta$ um diskrete Zufallsvariablen handelt (wir betrachten nur diesen), dann kann man die gemeinsame Verteilung durch die Kontingenztafel darstellen
+	$$
+	\begin{array}{|c|cccc|c|}
+		\hline \text{gem. Dichte}&x_1&x_2&x_i&x_m&\\\hline
+		\theta_1&f(x_1,\theta_1)&f(x_2,\theta_1)&\cdots&f(x_m,\theta_1)&\\
+		\theta_2&f(x_1,\theta_2)&\ddots&&&\\
+		\vdots&\vdots&&f(x_i,\theta_j)&\vdots&f(\theta_j)=\sum_{i=1}^m f(x_i,\theta_j)\\
+		\theta_n&f(x_1,\theta_n)&\cdots&&f(x_m,\theta_n)&\\\hline
+		\text{Randdichte}&&&f(x_j)=\sum_{j=1}^n f(x_i,\theta_j)&&\\\hline
+	\end{array}
+	$$
+
+	\item Nun kann man die bedingte Verteilung von $X$ unter gegebenem $\theta$ darstellen als
+	\begin{equation*}
+		f(x_i|\theta_j)=P_\theta(X=x_i)
+	\end{equation*}
+	Da hierbei $\theta$ nun fest gewählt ist, kann man dies problemlos berechnen.
+
+	\item Jetzt kommt der Punkt an dem die Besonderheit der Bayes-Schätzung eingeht, man legt eine sogenannte \emph{a-priori-Dichte} für $\theta$ fest. 
+	Zum Beispiel kann dies eine Gleichverteilung auf ganz $\Theta$ sein, das würde bedeuten, man hat kein besonderes Vorwissen über $\theta$.
+	Man kann aber genaso vorgeben, dass einige Werte für $\theta$ wahrscheinlicher als andere sind, dies beeinflusst das Ergebnis und kann so zu genaueren Schätzergebnissen führen.
+
+	\item Als letztes berechnet man noch die Randdichte von $X$, unabhängig vom Parameter $\theta$
+	\begin{align*}
+		f(x_j)&=P(X=x_j)=\sum_{i=1}^n f(x_j|\theta_i)*f(\theta_i)\quad\text{(Satz v. d. totalen Wahrscheinlichkeit)}\\
+		&=\sum_{i=1}^n f(x_j,\theta_i)
+	\end{align*}
+\end{enumerate}
+
+Jetzt führen wir ein Experiment durch. Liegt uns nun eine Stichprobe $\tilde x\in\simpleset{x_1,\ldots,x_m}$ vor, so können wir damit von der a-priori-Dichte auf die sogenannte a-posteriori-Dichte $f(\theta_i,\tilde x)$ schließen.
+Wir erhalten also eine Aussage über die Wahrscheinlichkeit eines $\theta_i$ bei gegebenem Ergebnis $\tilde x$.
+\begin{align*}
+	f(\theta_i|\tilde x)&=\frac{f(\tilde x|\theta_i)*f(\theta_i)}{f(\tilde x)}\quad\text{(Satz von Bayes)}\\
+	&=\frac{f(\tilde x,\theta_i)}{\sum_{k=1}^m f(\tilde x|\theta_k) * f(\theta_k)}
+\end{align*}
