@@ -3,31 +3,129 @@
 \section{Allgemeines zum Schätzen}
 Beim Schätzen wollen wir von einer Beobachtung einer (teilweise) unbekannten Verteilung auf Parameter der Verteilung schließen.
 
-Das kann bedeuten, dass man versucht aus einer Stichprobe zu folgern, ob es sich zum Beispiel um eine Normalverteilung handelt.
-Aber ebenso kann man zum Beispiel den Parameter $\mu$ der Normalverteilung schätzen.
+Das kann zum einen bedeuten, dass man versucht aus einer Stichprobe zu folgern, um welche Art von Verteilung es sich handelt. Ebenso kann man Parameter einer bekannten Verteilung schätzen.
 
 Man sieht sofort dass man beim Schätzen einige Angaben entweder wissen oder Annahmen treffen muss.
-Selbstverständlich kann man nur Parameter einer Verteilung schätzen wenn man annimmt dass es sich um diese Verteilung handelt.
+Selbstverständlich kann man nur Parameter einer Verteilung schätzen wenn man annimmt dass sich beim zugrundeliegenden Experiment um diese Verteilung handelt.
 
-Es gibt verschiede Arten zu Schätzen, so kann man beispielsweise einen Bereich angeben in dem sich der Parameter mit einer gewissen Sicherheit befindet (Lage- oder Intervallschätzer).
-
-
-
-
-\section{Intervallschätzer}
-Die Intervallschätzer geben ein Intervall an, in dem sich der zu schätzende Parameter höchstwahrscheinlich befindet. Hierbei sind möglichst kleine Intervalle bei einer hohen Sicherheit natürlich gewünscht, aber diese Einschränkungen widersprechen sich. 
-Verkleinert man das Intervall wird die Sicherheit, dass der geschätze Parameter wirklich enthalten ist im Allgemeinen kleiner.
-
-
-\subsection{Mit Tschebyscheff-Ungleichung}
-
-\subsection{Über die Verteilungsfunktion}
+Es gibt verschiede Arten zu Schätzen, so kann man einerseits einen Bereich angeben in dem sich der Parameter mit einer gewissen Sicherheit befindet (Intervallschätzer). Andererseits kann man auch einen Wert angeben den der Parameter bei gegebener Stichprobe am wahrscheinlichsten annimmt (Punktschätzer).
 
 
 
 
 
-\section{Maximum-Likelihood-Schätzer}
+
+
+
+
+
+
+\section{Punktschätzer}
+Punktschätzer liefern einen genauen Wert als Ergebnis des Schätzens. Dabei ist dieser Wert der, der bei gegebener Stichprobe am wahrscheinlichsten ist.
+
+
+
+\paragraph{Unspezifische Parameter}
+Es wird zwischen zwei Arten der Schätzparameter unterschieden, unspezifische Parameter die keine Informationen über das Experiment beinhalten. So sind die folgenden zum Beispiel unspezifische Parameter
+\begin{itemize}
+	\item Erwartungswert $E(X)$ oder Varianz $V(X)$,
+	\item der Median oder andere Quantile einer Zufallsvariable,
+	\item die Korrelation von zwei Zufallsvariablen.
+\end{itemize}
+\paragraph{Spezifische Parameter}
+Dagegen enthalten spezifische Parameter Informationen auch über das konkrete Experiment. Einige Beispiele hierfür wären
+\begin{itemize}
+	\item Der Parameter $p$ der Binomialverteilung $\binomial(n,p)$,
+	\item $\sigma^2,\mu$ einer Normalverteilung $\norm(n,p)$,
+	\item oder $\lambda$ von $\poisson(\lambda)$.
+\end{itemize}
+Um diese Parameter zu schätzen benötigt man eine sogenannte Schätzstatistik. 
+
+\begin{definition}{Schätzstatistik}
+	Eine Schätzstatistik oder Schätzfunktion ist eine Abbildung
+	\begin{equation*}
+		g(X_1,\ldots,X_n)
+	\end{equation*}
+	in den Stichprobenvariablen $X_i$.
+	Für eine Stichprobe $\omega$ (Realisierung) $x_1,\ldots,x_n$ heißt der Wert
+	\begin{equation*}
+		g(x_1,\ldots,x_n)=g(X_1(\omega),\ldots,X_n(\omega))
+	\end{equation*}
+	Schätzwert der Realisierung.
+\end{definition}
+\paragraph{Beispiele:}
+Die folgenden Zufallsvariablen sind Schätzstatistiken
+\begin{equation}\label{eq:schatzstatistiken}
+	\begin{split}
+		\overline X=g(X_1,\ldots,X_n)&\coloneqq \frac1n\sum_{i=1}^n X_i&&\text{für }\mu=E(X)\\
+		S^2 =g(X_1,\ldots,X_n)&\coloneqq \frac{1}{n-1}\sum_{i=1}^n (X_i-\overline X)^2&&\text{für }\sigma^2=V(X)\\
+		\quad \tilde S^2 =g(X_1,\ldots,X_n)&\coloneqq\frac1n\sum_{i=1}^n (X_i-\overline X)^2&&\text{für }\sigma^2=V(X)
+	\end{split}
+\end{equation}
+
+
+Betrachtet man Schätzstatistiken, stellt sich die Frage ob diese tendenziell den richtigen Wert liefern. Diese Eigenschaft nennt man Erwartungstreue.
+
+\begin{definition}{Erwartungstreue}
+	Man nennt eine Schätzstatistik $g(X_1,\ldots,X_n)$ für den Parameter $\alpha$ \emph{erwartungstreu}, falls
+	\begin{equation*}
+		E_\alpha(g(X_1,\ldots,X_n))=\alpha.
+	\end{equation*}
+	
+	Gilt lediglich, dass
+	\begin{equation*}
+		\lim_{n\to\infty} E_\alpha(g(X_1,\ldots,X_n))=\alpha
+	\end{equation*}
+	so nennt man $g$ \emph{asymptotisch erwartungstreu}.
+
+	Allgemein ist die \emph{Verzerrung} oder der \emph{Bias}
+	\begin{equation*}
+		\operatorname{Bias}_\alpha (g(X_1,\ldots,X_n))=E_\alpha(g(X_1,\ldots,X_n))-\alpha
+	\end{equation*}
+\end{definition}
+Untersuchen wir nun die Schätzstatistiken aus \autoref{eq:schatzstatistiken} auf Erwartungstreue.
+
+Wir sehen aus
+\begin{equation*}
+	E_\mu(\overline X)=E_\mu\left( \frac1n\sum_{i=1}^n X_i \right)=\frac1n\sum_{i=1}^n E_\mu(X_i)=\mu,
+\end{equation*}
+dass $\overline X$ erwartungstreu ist.
+
+Für $S^2$ und $\tilde S^2$ betrachten wir zunächst die folgende Umformung
+\begin{align*}
+	E_{\sigma^2}(S^2)&=E_{\sigma^2}\left( \frac{1}{n-1}\sum_{i=1}^n (X_i-\overline X)^2 \right)\\
+	&=\frac{1}{n-1} * E_{\sigma^2}\left( \sum_{i=1}^n (X_i-\overline X)^2 \right)\\
+	&=\frac{1}{n-1} * E_{\sigma^2}\left( \sum_{i=1}^n X_i^2- 2\overline X X_i +\overline X^2 \right)\\
+	&=\frac{1}{n-1} * E_{\sigma^2}\left( \sum_{i=1}^n X_i^2- 2\overline X n\overline X +n\overline X^2 \right)\\
+	&=\frac{1}{n-1} * E_{\sigma^2}\left( \sum_{i=1}^n X_i^2- n\overline X \right)\\
+	&=\frac{1}{n-1} * \left(\sum_{i=1}^n E_{\sigma^2}(  X_i^2 )- n E_{\sigma^2}(\overline X ) \right)\\
+	\intertext{Mit dem Verschiebungssatz $V(Z)=E(Z^2)-E(Z)^2$ folgt daraus nun, dass $E(X_i^2)=V(X_i)+E(X_i)^2=\sigma^2+\mu^2$ und analog $E(\overline X^2)=V(\overline X)+E(\overline X)^2=\frac{\sigma^2}{n}+\mu^2$. Damit ergibt sich}
+	E_{\sigma^2}(S^2)&=\frac{1}{n-1} \left(\sum_{i=1}^n (\sigma^2+\mu^2)-n\left(\frac{\sigma^2}{n}+\mu^2\right)\right)\\
+	&=\frac{1}{n-1} \left(n\sigma^2+n\mu^2-(\sigma^2+n\mu^2)\right) \\
+	&=\frac{1}{n-1} (n-1)*\sigma^2
+\end{align*}
+Man sieht sofort, dass $S^2$ ein erwartungstreuer Schätzer für $\sigma^2$ während $\tilde S^2$ nicht erwartungstreu ist. Allerdings $\tilde S^2$ ist asymptotisch erwartungstreu
+\begin{equation*}
+ 	\lim_{n\to\infty} E_{\sigma^2}(\tilde S^2)=\lim_{n\to\infty} \sigma^2-\frac{\sigma^2}n=\sigma^2
+\end{equation*} 
+
+Hiervon ausgehend ist die Abweichung einer erwartungstreuen Schätzstatistik interessant.
+\begin{definition}{Standardfehler für erwartungstreue Schätzstatistiken}
+	Der Standardfehler einer erwartungstreuen Schätzstatistik $g$ ist definiert als der Wert%
+	\begin{equation*}
+		\sigma_g = \sqrt{V(g(X_1,\ldots,X_n))}
+	\end{equation*}
+\end{definition}
+\paragraph{Beispiel:}
+Der Standardfehler von $\overline X$ ist
+\begin{equation*}
+	\sigma_g = \sqrt{V(\overline X)}= \sqrt{\frac{\sigma^2}{n}}=\frac\sigma n
+\end{equation*}
+So wird ein weiteres Problem klar - $\sigma^2$ ist möglicherweise unbekannt und muss ebenfalls geschätzt werden.
+
+
+
+\subsection{Maximum-Likelihood-Schätzer}
 Die Maximum-Likelihood-Schätzmethode verwendet eine sogenannte Likelihoodfunktion $L$. Diese ist abhängig vom zu schätzenden Parameter $\alpha$, man sucht dann den Wert für $\alpha$ so, dass $L(\alpha)$ ein Maximum annimmt. Häufig wird dieser Wert mit einem Dach gekennzeichnet. 
 
 Das Ergebnis dieses Schätzers wäre also allgemein
@@ -101,7 +199,7 @@ Damit folgt
 \begin{align*}
 	\frac{\diff}{\diff p}L(p) &= \binom{200}{k}*\left[ k*p^{k-1}(1-p)^{200-k} - p^k*(200-k)*(1-p)^{200-k-1}\right]\\
 	&=\underbrace{\binom{200}{16}* p^{k-1}(1-p)^{200-k-1}}_{>0} * \left[ k(1-p)-200p+kp \right]\\
-\end{align*}
+\end{align*}%
 Da wir uns für Nullstellen interessieren, betrachten wir nur noch den rechten Teil und erhalten
 \begin{align*}
 	k(1-\hat p)-200\hat p+k\hat p&\overset != 0\\
@@ -118,16 +216,7 @@ Wir haben damit die Populationsgröße der Fischart auf 625 geschätzt.
 
 
 
-
-
-\section{Kleinste Quadrate-Schätzer}
-
-
-
-\section{Bayes-Schätzer}
-
-
-
+\subsection{Bayes-Schätzer}
 Wir betrachten die Zufallsvariable $X$ mit dem zugehörigen Wahrscheinlichkeitsraum $(X(\Omega), P_\theta)$. Hierbei wollen wir den Parameter $\theta$ schätzen. 
 
 Der Bayes-Schätzer stellt eine komplett andere Herangehensweise an das Schätzen dar, hier wird der gesuchte Parameter als eine Zufallsvariable aufgefasst. So können weitere Annahmen wie Erfahrung aus anderen Experimenten oder ein grobes Vorwissen über den Sachverhalt in den Schätzvorgang eingehen.
@@ -172,3 +261,86 @@ Wir erhalten also eine Aussage über die Wahrscheinlichkeit eines $\theta_i$ bei
 	f(\theta_i|\tilde x)&=\frac{f(\tilde x|\theta_i)*f(\theta_i)}{f(\tilde x)}\quad\text{(Satz von Bayes)}\\
 	&=\frac{f(\tilde x,\theta_i)}{\sum_{k=1}^m f(\tilde x|\theta_k) * f(\theta_k)}
 \end{align*}
+
+Hiervon ausgehend gibt es zwei Arten, sich auf ein $\theta$ festzulegen.
+\paragraph{A-posteriori-Erwartungswert}
+Die erste Variante ist, das Schätzergebnis als den Erwartungswert
+\begin{equation*}
+	\hat\theta_p = E(\theta|\tilde x) = \sum_{i=1}^n \theta_i*f(\theta_i|\tilde x)
+\end{equation*}
+zu wählen. (Beziehungsweise das nächstgelegene $\theta\in\Theta$.)
+
+\paragraph{Maximum-a-posteriori-Schätzer}
+Analog zum Maximum-Likelihood-Schätzer kann man das Maximum der a-posteriori-Dichte als Schätzergebnis wählen
+\begin{equation*}
+	\hat\theta_{\text{MAP}} = \underset\theta\argmax f(\theta|\tilde x).
+\end{equation*}
+
+Führt man den Bayes-Schätzer ohne Vorwissen - d.h. gleichverteiltes $\theta$ - durch, so stimmt $\hat\theta_{\text{MAP}}$ mit dem Maximum-Likelihood-Schätzer überein.
+
+
+
+\subsection{Kleinste Quadrate-Schätzer}
+Der kleinste Quadrate-Schätzer minimiert die Summe der quadratischen Abweichungen.
+
+So eignet er sich zum Beispiel zum Schätzen des Erwartungswerts $\mu$,
+\begin{align*}
+	Q(\mu) &= \sum_{i=1}^n(X_i-\mu)^2\\
+	\intertext{dabei wird das arithmetische Mittel als Schätzstatistik verwendet}
+	\frac{\diff}{\diff \mu} Q(\mu)&= -2\sum_{i=1}^n(X_i-\mu)\overset != 0\\
+	\Rightarrow \quad \hat\mu&= \frac1n \sum_{i=1}^n X_i = \overline X.
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+\section{Intervallschätzer - Konfidenzintervalle}
+Die Intervallschätzer geben ein Intervall an, in dem sich der zu schätzende Parameter höchstwahrscheinlich befindet. Hierbei sind möglichst kleine Intervalle bei einer hohen Sicherheit natürlich gewünscht, aber diese Einschränkungen widersprechen sich. 
+Verkleinert man das Intervall wird die Sicherheit, dass der geschätze Parameter wirklich enthalten ist im Allgemeinen kleiner.
+
+
+\subsection{Mit Tschebyscheff-Ungleichung}
+Hierbei wird die \hyperref[tschebyscheff]{Tschebyscheff-Ungleichung} \autoref{tschebyscheff} zum Abschätzen der Intervallgröße verwendet.
+\subsection{Über die Verteilungsfunktion}
+
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[->, line width=0.3mm] (0,0) to (8.5,0) node[below] {$p$};
+		\draw[->, line width=0.3mm] (0,0) to (0,5) node[right] {$P_p(X=0)$};
+
+		\draw[line width=0.5mm,scale=1,domain=0:8,smooth,variable=\x,blue, samples=100] plot ({\x},{4.5*exp(-0.5*\x)-0.03});
+
+		\draw[line width=0.5mm,scale=1,domain=0:8,smooth,variable=\x,green, samples=100] plot ({\x},{2});	
+
+		\draw (0,2) node (beta) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$\beta$}] {};
+		\draw (1.6,2) node (Pbeta) [fill = white,circle,inner sep = 0pt,minimum size = 4pt,draw] {};
+
+		\draw (1.6,0) node (po) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$p_o(0)$}] {};
+
+		\draw[dashed, blue] (po) -- (Pbeta);
+		
+		\draw (0,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below left:$0$}] {};
+		\draw (0,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw] {};
+		
+		\draw (8,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$1$}] {};
+
+		\draw (0,4.5) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$1$}] {};
+
+
+		\draw [decorate,decoration={brace,amplitude=5pt},yshift=0pt]
+		(1.6,-1) -- (0,-1) node [black,midway,yshift=-0.6cm, align=center] 
+		{\footnotesize Fall 1) $0<p<p_o(0)$\\$\simpleset{p_o\circ X< p}\cap\simpleset{X=0}=\emptyset$};
+
+
+		\draw [decorate,decoration={brace,amplitude=5pt},yshift=0pt]
+		(1.6,2.2) -- (8,2.2) node [black,midway,yshift=0.6cm, xshift=0.6cm, align=center] 
+		{\footnotesize Fall 2) $p_o(0)\leq p<1$\\$P_p(\simpleset{p_o\circ X< p}\cap\simpleset{X=0})\leq P_p(X=0)\leq \beta$};
+	\end{tikzpicture}	
+\end{center}
