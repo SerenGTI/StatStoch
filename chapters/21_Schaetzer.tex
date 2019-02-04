@@ -298,17 +298,36 @@ So eignet er sich zum Beispiel zum Schätzen des Erwartungswerts $\mu$,
 
 
 
-
-
 \section{Intervallschätzer - Konfidenzintervalle}
 Die Intervallschätzer geben ein Intervall an, in dem sich der zu schätzende Parameter höchstwahrscheinlich befindet. Hierbei sind möglichst kleine Intervalle bei einer hohen Sicherheit natürlich gewünscht, aber diese Einschränkungen widersprechen sich. 
 Verkleinert man das Intervall wird die Sicherheit, dass der geschätze Parameter wirklich enthalten ist im Allgemeinen kleiner.
 
+Wir möchten nun zum Beispiel herausfinden, wie sicher wir uns sind, dass das Ergebnis eines Punktschätzers stimmt. Dafür bestimmen wir das \emph{Vertrauens- bzw. Konfidenzintervall}
+\begin{equation*}
+	J_n\coloneqq [\theta_u(X),\theta_o(X)]
+\end{equation*}
+wobei wir den Parameter $\theta$ schätzen, der Werte aus $\Theta$ annimmt. Die Zufallsvariablen 
+\begin{equation*}
+	\theta_u(X),\theta_o(X): \Omega\rightarrow \Theta
+\end{equation*}
+stellen dabei die untere und die obere Intervallgrenze dar. Sie beschreiben einen Grenzwert von $\theta$ in Abhängigkeit von der Stichprobe.
+
+Dieses Intervall $J_n$ soll das unbekannte $\theta$ mit einer \emph{Garantiewahrscheinlichkeit} von $(1-\alpha)$ enthalten, das heißt
+\begin{equation*}
+	P_\theta (\theta\in J_n)=P_\theta(\theta_u(X)\leq \theta\leq \theta_o(X))\geq (1-\alpha)
+\end{equation*}
+für alle Werte des Parameters $\theta$.
 
 \subsection{Mit Tschebyscheff-Ungleichung}
-Hierbei wird die \hyperref[tschebyscheff]{Tschebyscheff-Ungleichung} \autoref{tschebyscheff} zum Abschätzen der Intervallgröße verwendet.
-\subsection{Über die Verteilungsfunktion}
+Eine grobe Abschätzung dieser Grenzen kann zum Beispiel über die \hyperref[tschebyscheff]{Tschebyscheff-Ungleichung} erfolgen.
+Damit kann man die Wahrscheinlichkeit beschränken, dass der Parameter außerhalb des Intervalls liegt
+\begin{equation*}
+	P_\theta(|X-\theta|\geq \epsilon)\leq \frac{V(X)}{\epsilon^2}\leq \alpha.
+\end{equation*}
 
+
+\subsection{Über die Verteilungsfunktion}
+Genaue Werte über die Verteilung
 
 \begin{center}
 	\begin{tikzpicture}[scale=0.8]
@@ -342,5 +361,30 @@ Hierbei wird die \hyperref[tschebyscheff]{Tschebyscheff-Ungleichung} \autoref{ts
 		\draw [decorate,decoration={brace,amplitude=5pt},yshift=0pt]
 		(1.6,2.2) -- (8,2.2) node [black,midway,yshift=0.6cm, xshift=0.6cm, align=center] 
 		{\footnotesize Fall 2) $p_o(0)\leq p<1$\\$P_p(\simpleset{p_o\circ X< p}\cap\simpleset{X=0})\leq P_p(X=0)\leq \beta$};
+	\end{tikzpicture}	
+\end{center}
+
+
+\subsection{Approximation über die Normalverteilung}
+Für große $n$ wird in der Praxis oft auf die Normalverteilung zurückgeführt und das Problem auf eine Quantilsbestimmung reduziert.
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.9]
+		\draw[->, line width=0.3mm] (-6.5,0) to (6.5,0) node[below] {$x$};
+		\draw[->, line width=0.3mm] (0,0) to (0,6) node[right] {$f^X(x)$};
+
+		\filldraw[scale=1,domain=-6:-1.5,smooth,variable=\x,fill=green, opacity=0.4, draw=none] plot ({\x},{5*exp(-\x*\x/4)}) -- (-1.5,0);
+		\filldraw[scale=1,domain=1.5:6,smooth,variable=\x,fill=green, opacity=0.4, draw=none] plot ({\x},{5*exp(-\x*\x/4)}) -- (1.5,0);
+		
+		\draw[line width=0.5mm,scale=1,domain=-6:6,smooth,variable=\x,blue] plot ({\x},{5*exp(-\x*\x/4)});
+
+		\draw (1.5,0) node (zp) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$z_p$}] {};
+		\draw (-1.5,0) node (-zp) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$-z_p$}] {};
+
+		\draw (-2.25,0.5) node[green!70!black] {$1-p$};
+		\draw (2.25,0.5) node[green!70!black] {$1-p$};
+		
+		\draw (0,0) node (null) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$0$}] {};
+		
 	\end{tikzpicture}	
 \end{center}
