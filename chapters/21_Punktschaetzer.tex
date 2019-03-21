@@ -126,15 +126,17 @@ So wird ein weiteres Problem klar - $\sigma^2$ ist möglicherweise unbekannt und
 
 
 \subsection{Maximum-Likelihood-Schätzer}
-Die Maximum-Likelihood-Schätzmethode verwendet eine sogenannte Likelihoodfunktion $L$. Diese ist abhängig vom zu schätzenden Parameter $\alpha$, man sucht dann den Wert für $\alpha$ so, dass $L(\alpha)$ ein Maximum annimmt. Häufig wird dieser Wert mit einem Dach gekennzeichnet. 
+Die Maximum-Likelihood-Schätzmethode verwendet eine sogenannte Likelihoodfunktion $L$. Diese ist abhängig vom zu schätzenden Parameter $\alpha$, man sucht dann den Wert für $\alpha$ so, dass $L(\alpha)$ ein Maximum annimmt. Häufig wird dieser Wert mit einem Dach gekennzeichnet. Es liegen die Stichproben $x_i, i\in\simpleset{1,\ldots,n}$ zugrunde.
 
 Das Ergebnis dieses Schätzers wäre also allgemein
 \begin{equation*}
 	\hat\alpha = \underset\alpha\argmax L(\alpha)
 \end{equation*}
 
-Hierbei hängt die Likelihoodfunktion davon ab, was bei welcher Verteilung geschätzt wird. 
-
+Hierbei hängt die Likelihoodfunktion davon ab, was bei welcher Verteilung geschätzt wird. Sie wird immer bestimmt durch das Produkt aus den Wahrscheinlichkeitsfunktionen gegebener Stichproben $x_i$ abhängig vom zu schätzenden Parameter.
+\begin{equation*}
+	L(\alpha) = \prod_{i=1}^{n} f_{x_i}(\alpha)
+\end{equation*}
 
 Wir wollen den Maximum-Likelihood-Schätzer anhand der Binomialverteilung betrachten.
 Hierbei macht nur Schätzen des Parameters $p$ Sinn, denn selbst wenn nur eine einzige Stichprobe vorliegt, sieht man sofort welchen Wert $n$ hat.
@@ -151,6 +153,7 @@ Zum Schätzen fehlt uns noch die Likelihoodfunktion, diese ist hier
 \begin{equation*}
 	L:(0,1)\rightarrow[0,1], \enspace L(p)=P_p(X=k)=\binom{n}{k}*p^k(1-p)^{n-k}
 \end{equation*}
+da die einzige Stichprobe $X(\omega)=k$ ist und somit $f_{k}(p)=P_p(X=k)$ ist.
 
 Das heißt, es ist die Wahrscheinlichkeit dass $X$ mit Trefferwahrscheinlichkeit $p$ (als Parameter!) den Wert $k$ annimmt. Man sieht, dass diese Funktion ihr Maximum bei dem Wert für $p$ annimmt, unter dem es am wahrscheinlichsten ist, die Stichprobe $\omega$ zu erhalten.
 \begin{center}
