@@ -16,7 +16,7 @@ Es ist also
 	P(X=k)=q^kp.
 \end{equation*}
 
-Die Verteilungsfunktion an den Stellen $i\in \N$ der geometrisch Verteilten Variable ist
+Die Verteilungsfunktion an den Stellen $i\in \N$ der geometrisch verteilten Variable ist
 \begin{equation*}
 	F^X(i)=P(X\leq i) = \sum_{k=0}^i P(X=k)=p*\sum_{k=0}^i q^k=p*\frac{1-q^{i+1}}{1-q}=1-q^{i+1}.
 \end{equation*}
@@ -29,6 +29,11 @@ Mit der Umformung
 \begin{equation}
 	\sum_{i=0}^\infty i*q^{i-1}=\sum_{i=0}^\infty \frac{\diff}{\diff q} q^k=\frac{\diff}{\diff q} \sum_{i=0}^\infty q^i = \frac{\diff}{\diff q}\frac{1}{1-q}=\frac{1}{(1-q)^2}.\label{eGeomZusatz}
 \end{equation}
+
+Die Varianz von $X$ ist dann
+\begin{equation*}
+	V(X)=\frac{1-p}{q^2}=\frac{q}{p^2}.
+\end{equation*}
 
 
 \paragraph{Beispiel:}

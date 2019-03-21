@@ -1,7 +1,7 @@
 %!TEX root = ../main.tex
 \chapter{Hypothesentests}
 \section{Allgemeines zu Tests und Hypothesen}
-
+Es ist immer ein Signifikanzniveau $\alpha$ gegeben, mit dem man den Fehler 1. Art beschränkt.
 
 \subsection{Links- rechtsseitiger Hypothesentest}
 \begin{center}
@@ -9,15 +9,84 @@
 		&linksseitig&gemeinsam&rechtsseitig\\\hline
 		Annahmebereich:&$\Theta_0=[p_0,1)$&$\Big|$&$\Theta_0=(0,p_0]$\\
 		Ablehnungsbereich:&&$\Theta_1=(0,1)\setminus\Theta_0$&\\
-		Kritischer Punkt:&\makecell{$k^\ast$ maximal mit\\ $P_{p_0}(S_n\leq k^\ast)\leq\alpha$}&$\Bigg|$&\makecell{$k^\ast$ minimal mit\\ $P_{p_0}(S_n\geq k^\ast)\leq\alpha$}\\
+		Kritischer Punkt:&\makecell{$k^\ast$ maximal mit\\ $P_{p_0}(X\leq k^\ast)\leq\alpha$}&$\Bigg|$&\makecell{$k^\ast$ minimal mit\\ $P_{p_0}(X\geq k^\ast)\leq\alpha$}\\
 		Kritischer Bereich:&$\mathcal K_1=\simpleset{0,\ldots,k^\ast}$&$\Big|$&$\mathcal K_1=\simpleset{k^\ast,\ldots,n}$\\
-		Gütefunktion:&&$g(p)=P_p(S_n\in\mathcal K_1)$&
+		Gütefunktion:&&$g(\theta)=P_\theta(X\in\mathcal K_1)$&
 	\end{tabular}
 \end{center}
 
 
+Gütefunktion für einen rechtsseitigen Test
+\begin{center}
+	\begin{tikzpicture}[scale=0.9]
+		\draw[->, line width=0.3mm] (0,0) to (8.5,0) node[below] {$\theta$};
+		\draw[->, line width=0.3mm] (0,0) to (0,5) node[right] {$g(\theta)=P_\theta(X\in \mathcal K_1)$};		
+
+		\draw[line width=0.5mm,scale=1,domain=0:4,smooth,variable=\x,blue] plot ({\x},{0.9*exp((\x-4)/1.7)});
+		\draw[line width=0.5mm,scale=1,domain=4:8,smooth,variable=\x,blue] plot ({\x},{-3.12*exp(-(\x-4))+4});
+		
+		\draw (0,0) node (null) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$0$}] {};
+		\draw (0,4) node (eins) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$1$}] {};
+		\draw (0,1) node (alpha) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$\alpha$}] {};
+		\draw[dotted, gray] (eins) -- (8, 4);
+
+		\draw[red, dashed, line width=0.3mm] (alpha) -- (8,1);
+
+
+		\draw[black, line width=0.3mm, dashed] (4,-0.5) -- (4,5);
+			
+		\draw [decorate,decoration={brace,amplitude=7pt}]
+		(3.9,-0.5) -- (0,-0.5) node [black,midway, yshift=-17pt] 
+		{\footnotesize $\Theta_0$};
+
+		\draw [decorate,decoration={brace,amplitude=7pt}]
+		(8,-0.5) -- (4.1,-0.5) node [black,midway, yshift=-17pt] 
+		{\footnotesize $\Theta_1$};
+
+		%Fehler 1. Art
+		\draw [arrows=<->, red, line width=0.3mm] (3.5,0) -- (3.5,0.65);
+		\draw (3.5,0.35) node (null) [text=red, label={right:{\color{red}Fehler 1. Art}}] {};
+		
+
+		%Fehler 2. Art
+		\draw [arrows=<->, red, line width=0.3mm] (5,2.85) -- (5,4);
+		\draw (5,3.5) node (null) [text=red, label={left:{\color{red}Fehler 2. Art}}] {};
+		
+		
+	\end{tikzpicture}	
+\end{center}
+
 \subsection{Fehlerarten}
+\begin{center}
+	\begin{tabular}{r|cc}
+		&$H_0$ gilt&$H_1$ gilt\\\hline
+		$H_0$ nicht abgelehnt&Sepzifität&\makecell{Fehler 2. Art\\ false negative}\\
+		$H_0$ abgelehnt&\makecell{Fehler 1. Art\\ false positive}&Sensitivität
+	\end{tabular}
+\end{center}
 
 
 \section{Binomialtest}
 
+\section{Gaußtest (Test mit der Normalverteilung)}
+Wir wollen mit dem Mittelwert der Normalverteilung einen Hypothesentest durchführen. Das heißt also zum Beispiel prüfen ob der Mittelwert tatsächlich einem erwarteten Wert $\mu$ entspricht.
+\begin{enumerate}
+	\item Wir verwenden hierfür die Teststatistik $\overline X=\frac1n\sum_{i=1}^n X_i$ als Schätzer für den Mittelwert. Wir benötigen außerdem den Standardfehler $\sigma_{\overline X}=\sqrt{\frac{\sigma^2}{n}}$ um auf die Standardnormalverteilung reduzieren zu können.
+	\item Nun führen den Test auf eine Standardnormalverteilung zurück, indem wir die folgende Zufallsvariable festlegen
+	\begin{equation*}
+		Z=\frac{\overline X-\mu}{\frac{\sigma}{\sqrt n}}\sim\norm(0,1).
+	\end{equation*}
+	\item Wir können nun die Quantile $z_p$ der Standardnormalverteilung aus einer Tabelle ablesen.
+	Dann wird der Ablehnungsbereich $\Theta_1$ entsprechend dem Signifikanzniveau $\alpha$ wie folgt bestimmt
+	\begin{center}
+		\begin{tabular}{c|c|c}
+			linksseitiger Test&rechtsseitiger Test&beidseitiger Test\\\hline
+			$\Theta_1=(-\infty, z_{\alpha}]$&$\Theta_1=[z_{1-\alpha},\infty)$&$\Theta_1=(-\infty, z_{\alpha/2}]+[z_{1-\alpha/2},\infty)$
+		\end{tabular}
+	\end{center}
+	\item Als letztes muss man noch prüfen, ob der beobachtete Wert aus der Teststatistik im Ablehnungsbereich liegt. Das heißt, falls
+	\begin{equation*}
+	 	\frac{\overline X-\mu}{\frac{\sigma}{\sqrt n}}\in \Theta_1
+	\end{equation*}
+	für die gegebene Stichprobe gilt, so wird $H_0$ zum gegebenen Signifikanzniveau verworfen.
+\end{enumerate}
