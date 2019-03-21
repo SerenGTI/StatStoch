@@ -6,19 +6,20 @@ Verkleinert man das Intervall wird die Sicherheit, dass der geschätze Parameter
 
 Wir möchten nun zum Beispiel herausfinden, wie sicher wir uns sind, dass das Ergebnis eines Punktschätzers stimmt. Dafür bestimmen wir das \emph{Vertrauens- bzw. Konfidenzintervall}
 \begin{equation*}
-	J_n\coloneqq [\theta_u(X),\theta_o(X)]
+	J_n\coloneqq [\theta_u\circ X,\theta_o\circ X]
 \end{equation*}
 wobei wir den Parameter $\theta$ schätzen, der Werte aus $\Theta$ annimmt. Die Zufallsvariablen 
 \begin{equation*}
-	\theta_u(X),\theta_o(X): \Omega\rightarrow \Theta
+	\theta_u\circ X,\theta_o\circ X: \Omega\rightarrow \Theta 
 \end{equation*}
-stellen dabei die untere und die obere Intervallgrenze dar. Sie beschreiben einen Grenzwert von $\theta$ in Abhängigkeit von der Stichprobe.
+stellen dabei die untere und die obere Intervallgrenze dar (sinnvollerweise soll also $\theta_u\circ X\leq \theta_o\circ X$ gelten). Sie beschreiben einen Grenzwert von $\theta$ in Abhängigkeit von der Stichprobe.
 
 Dieses Intervall $J_n$ soll das unbekannte $\theta$ mit einer \emph{Garantiewahrscheinlichkeit} von $(1-\alpha)$ enthalten, das heißt
-\begin{equation*}
-	P_\theta (\theta\in J_n)=P_\theta(\theta_u(X)\leq \theta\leq \theta_o(X))\geq (1-\alpha)
-\end{equation*}
+\begin{equation}\label{eq:intervall}
+	P_\theta (\theta\in J_n)=P_\theta(\theta_u\circ X\leq \theta\leq \theta_o\circ X)\geq 1-\alpha
+\end{equation}
 für alle Werte des Parameters $\theta$.
+
 
 \subsection{Abschätzen mit der Tschebyscheff-Ungleichung}
 Eine grobe Abschätzung dieser Grenzen kann zum Beispiel über die \hyperref[tschebyscheff]{Tschebyscheff-Ungleichung} erfolgen.
@@ -38,31 +39,42 @@ die Abschätzung für die beiden Intervallgrenzen
 \end{align*}
 Diese garantiert für alle $\theta\in\Theta$, dass der unbekannte Parameter $\theta$ nur mit Unsicherheit $\alpha$ außerhalb des geschätzten Intervalls liegt.
 \begin{equation*}
-	P_\theta(p\not\in J_n)=\textstyle P_\theta\left(p\not\in \left[ X-\sqrt{\frac{V(X)}{\alpha}},X+\sqrt{\frac{V(X)}{\alpha}}\right]\right)\leq \alpha.
+	P_\theta(\theta\not\in J_n)=\textstyle P_\theta\left(\theta\not\in \left[ X-\sqrt{\frac{V(X)}{\alpha}},X+\sqrt{\frac{V(X)}{\alpha}}\right]\right)\leq \alpha.
 \end{equation*}
+
 
 
 \subsection{Abschätzen über die Verteilungsfunktion}
 Die Ergebnisse, die man durch die Abschätzung mit Tschebyscheff erhält, sind sehr grob. Einen genaueren Ansatz bietet die Abschätzung der Intervallgrenzen über die Verteilungsfunktion.
 
-Wir betrachten dies anhand des Beispiels $X\sim\binomial(n,\theta)$, wobei $\theta$ wiederum unbekannt ist.
-
-Wir wollen die beiden Konfidenzgrenzen $\theta_u(X),\theta_o(X)$ so bestimmen, dass gilt
+Wir wollen die Wahrscheinlichkeit eines Ereignisses mit der Garantiewahrscheinlichkeit beschränken, siehe \autoref{eq:intervall}. Dieses vom Parameter $\theta$ abhängige Ereignis ist
 \begin{equation*}
-	P_\theta(\theta_u(X) \leq \theta )\geq 1-\beta \enspace\text{ und }\enspace P_\theta(\theta \leq \theta_o(X) )\geq 1-\beta.
+	A_\theta = \simpleset{\theta_u\circ X\leq \theta\leq \theta_o\circ X} = \simpleset{\theta\in J_n}
 \end{equation*}
-Das heißt wir beschränken das Intervall von oben und unten jeweils mit der Konfidenzwahrscheinlichkeit $\beta=\frac\alpha2$.
-
-Sei $k\in X(\Omega)$, $P_\theta(X\leq k)$ ist monoton fallend, wir bestimmen damit ein $\theta_u(k)$ und ein $\theta_o(k)$ so, dass gilt
+Um die beiden Schranken mit der Verteilungsfunktion abzuschätzen, betrachten wir das Komplement dieses Ereignisses
 \begin{equation*}
-	P_{\theta_o(k)}(X\leq k)=\beta\enspace \text{ und }\enspace P_{\theta_u(k)}(X\leq k)=1-\beta.
+	\overline A_\theta =\simpleset{\theta_u\circ X > \theta}+\simpleset{\theta_o\circ X< \theta}.
 \end{equation*}
-Das heißt, wenn $\theta$ die obere Schranke wäre, ist die Wahrscheinlichkeit, dass $X$ kleinere Werte als $k$ annimmt genau $\beta$
+Die Wahrscheinlichkeit dieses Ereignisses soll durch die Unsicherheit beschränkt sein
+\begin{equation*}
+	P_\theta(\overline A_\theta) = P_\theta(\theta_u\circ X > \theta)+P_\theta(\theta_o\circ X< \theta)\overset!\leq\alpha
+\end{equation*}
+Man sieht, dass dies durch Abschätzen der beiden Teile mit $\beta=\frac\alpha2$ erreicht werden kann
+\begin{align}
+	P_\theta(\theta_u\circ X > \theta)\overset!\leq \beta \label{eq:untereSchranke}\\
+	P_\theta(\theta_o\circ X< \theta)\overset!\leq\beta \label{eq:obereSchranke}
+\end{align}
+Wir bestimmen die Schranken $\theta_u(k)$ und $\theta_o(k)$ so, dass die folgenden beiden Gleichungen gelten. Diese implizieren dann die Forderung.
+\begin{align*}
+	P_{\theta_u(k)}(X\geq k)\overset!=\beta\quad\Rightarrow (\ref{eq:untereSchranke})\\
+	P_{\theta_o(k)}(X\leq k)\overset!=\beta\quad\Rightarrow (\ref{eq:obereSchranke})
+\end{align*}
 
 
 
 
-\paragraph{?}
+\paragraph{Beispiel:}
+Ähm was?
 \begin{center}
 	\begin{tikzpicture}[scale=0.8]
 		\draw[->, line width=0.3mm] (0,0) to (8.5,0) node[below] {$p$};
@@ -100,7 +112,14 @@ Das heißt, wenn $\theta$ die obere Schranke wäre, ist die Wahrscheinlichkeit, 
 
 
 \subsection{Approximation über die Normalverteilung}
-Für große $n$ wird in der Praxis oft auf die Normalverteilung zurückgeführt und das Problem auf eine Quantilsbestimmung reduziert.
+Für große $n$ werden Binomialverteilungen und das Schätzen von $p$ in der Praxis oft auf die Normalverteilung zurückgeführt und das Problem auf eine Quantilsbestimmung reduziert.
+Denn es gilt für $S_n\sim\binomial(n,p)$
+\begin{equation*}
+	P_p(S_n\leq k) = F^{S_n}_p(k)\overset{\text{ZGWS}}\approx \Phi\left(\frac{k-np+\frac12}{\sqrt{np(1-p)}}\right).
+\end{equation*}
+Hierbei ist die Korrektur um $\frac12$ eine sogenannte Stetigkeitskorrektur.
+
+Hiermit lassen sich die Grenzen $p_u,p_o$ bestimmen.
 
 \begin{center}
 	\begin{tikzpicture}[scale=0.9]

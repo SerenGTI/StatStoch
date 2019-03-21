@@ -119,7 +119,7 @@ Hiervon ausgehend ist die Abweichung einer erwartungstreuen Schätzstatistik int
 \paragraph{Beispiel:}
 Der Standardfehler von $\overline X$ ist
 \begin{equation*}
-	\sigma_g = \sqrt{V(\overline X)}= \sqrt{\frac{\sigma^2}{n}}=\frac\sigma n
+	\sigma_g = \sqrt{V(\overline X)}= \sqrt{\frac{\sigma^2}{n}}=\frac\sigma {\sqrt n}
 \end{equation*}
 So wird ein weiteres Problem klar - $\sigma^2$ ist möglicherweise unbekannt und muss ebenfalls geschätzt werden.
 
@@ -255,7 +255,7 @@ Achtung, die Werte der Zufallsvariable $\theta$ werden ebenfalls $\theta$ genann
 	\end{align*}
 \end{enumerate}
 
-Jetzt führen wir ein Experiment durch. Liegt uns nun eine Stichprobe $\tilde x\in\simpleset{x_1,\ldots,x_m}$ vor, so können wir damit von der a-priori-Dichte auf die sogenannte a-posteriori-Dichte $f(\theta_i,\tilde x)$ schließen.
+Jetzt führen wir ein Experiment durch. Liegt uns nun eine Stichprobe $\tilde x\in\simpleset{x_1,\ldots,x_m}$ vor, so können wir damit von der a-priori-Dichte auf die sogenannte a-posteriori-Dichte $f(\theta_i|\tilde x)$ schließen.
 Wir erhalten also eine Aussage über die Wahrscheinlichkeit eines $\theta_i$ bei gegebenem Ergebnis $\tilde x$.
 \begin{align*}
 	f(\theta_i|\tilde x)&=\frac{f(\tilde x|\theta_i)*f(\theta_i)}{f(\tilde x)}\quad\text{(Satz von Bayes)}\\
