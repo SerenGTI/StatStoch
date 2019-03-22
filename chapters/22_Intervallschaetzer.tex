@@ -113,13 +113,20 @@ Wir bestimmen die Schranken $\theta_u(k)$ und $\theta_o(k)$ so, dass die folgend
 
 \subsection{Approximation über die Normalverteilung}
 Für große $n$ werden Binomialverteilungen und das Schätzen von $p$ in der Praxis oft auf die Normalverteilung zurückgeführt und das Problem auf eine Quantilsbestimmung reduziert.
-Denn es gilt für $S_n\sim\binomial(n,p)$
+Denn es gilt nach dem zentralen Grenzwertsatz für $S_n\sim\binomial(n,p)$ und große $n$
 \begin{equation*}
 	P_p(S_n\leq k) = F^{S_n}_p(k)\overset{\text{ZGWS}}\approx \Phi\left(\frac{k-np+\frac12}{\sqrt{np(1-p)}}\right).
 \end{equation*}
 Hierbei ist die Korrektur um $\frac12$ eine sogenannte Stetigkeitskorrektur.
 
-Hiermit lassen sich die Grenzen $p_u,p_o$ bestimmen.
+Damit lassen sich dann die Intervallgrenzen $p_u,p_o$ mit den Quantilen der Standardnormalverteilung bestimmen. Natürlich sind $n,k$ sowie $\beta$ bekannt.
+\begin{align*}
+	P_{p_o}(S_n\leq k)\approx \Phi\left(\frac{k-np_o+\frac12}{\sqrt{n*p_o(1-p_o)}}\right)&\overset!=\beta
+	&\Rightarrow \frac{k-np_o+\frac12}{\sqrt{n*p_o(1-p_o)}}&=z_\beta\\
+	P_{p_u}(S_n\geq k)=1-P_{p_u}(S_n<k)\approx 1-\Phi\left(\frac{k-np_u+\frac12}{\sqrt{n*p_u(1-p_u)}}\right)&\overset!=\beta
+	&\Rightarrow \frac{k-np_u+\frac12}{\sqrt{n*p_u(1-p_u)}}&=z_{1-\beta}=-z_\beta\\
+\end{align*}
+Diese Gleichungen muss man nur noch nach $p_u$ bzw. $p_o$ auflösen (eventuell mit der Mitternachtsformel) und man erhält die Intervallgrenzen zur gegebenen Unsicherheit $\alpha=2\beta$.
 
 \begin{center}
 	\begin{tikzpicture}[scale=0.9]
@@ -131,11 +138,11 @@ Hiermit lassen sich die Grenzen $p_u,p_o$ bestimmen.
 		
 		\draw[line width=0.5mm,scale=1,domain=-6:6,smooth,variable=\x,blue] plot ({\x},{5*exp(-\x*\x/4)});
 
-		\draw (1.5,0) node (zp) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$z_p$}] {};
-		\draw (-1.5,0) node (-zp) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$-z_p$}] {};
+		\draw (1.5,0) node (zp) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$z_\beta$}] {};
+		\draw (-1.5,0) node (-zp) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$-z_{\beta}$}] {};
 
-		\draw (-2.25,0.5) node[green!70!black] {$1-p$};
-		\draw (2.25,0.5) node[green!70!black] {$1-p$};
+		\draw (-2.25,0.5) node[green!70!black] {$\beta$};
+		\draw (2.25,0.5) node[green!70!black] {$\beta$};
 		
 		\draw (0,0) node (null) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$0$}] {};
 		
