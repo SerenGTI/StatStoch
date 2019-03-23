@@ -85,7 +85,7 @@ Betrachtet man Schätzstatistiken, stellt sich die Frage ob diese tendenziell de
 \end{definition}
 Untersuchen wir nun die Schätzstatistiken aus \autoref{eq:schatzstatistiken} auf Erwartungstreue.
 
-Wir sehen aus
+Wir sehen aus der Linearität
 \begin{equation*}
 	E_\mu(\overline X)=E_\mu\left( \frac1n\sum_{i=1}^n X_i \right)=\frac1n\sum_{i=1}^n E_\mu(X_i)=\mu,
 \end{equation*}
@@ -116,7 +116,6 @@ Hiervon ausgehend ist die Abweichung einer erwartungstreuen Schätzstatistik int
 		\sigma_g = \sqrt{V(g(X_1,\ldots,X_n))}
 	\end{equation*}
 \end{definition}
-\paragraph{Beispiel:}
 Der Standardfehler von $\overline X$ ist
 \begin{equation*}
 	\sigma_{\overline X} = \sqrt{V(\overline X)}= \sqrt{\frac{\sigma^2}{n}}=\frac\sigma {\sqrt n}
@@ -134,9 +133,9 @@ Das Ergebnis dieses Schätzers wäre also allgemein
 \end{equation*}
 
 Hierbei hängt die Likelihoodfunktion davon ab, was bei welcher Verteilung geschätzt wird. Sie wird immer bestimmt durch das Produkt aus den Wahrscheinlichkeitsfunktionen gegebener Stichproben $x_i$ abhängig vom zu schätzenden Parameter.
-\begin{equation*}
-	L(\alpha) = \prod_{i=1}^{n} f_{x_i}(\alpha)
-\end{equation*}
+\begin{equation}
+	L(\alpha) = \prod_{i=1}^{n} f(\alpha|x_i) \label{eq:likelihoodfunktion}
+\end{equation}
 
 Wir wollen den Maximum-Likelihood-Schätzer anhand der Binomialverteilung betrachten.
 Hierbei macht nur Schätzen des Parameters $p$ Sinn, denn selbst wenn nur eine einzige Stichprobe vorliegt, sieht man sofort welchen Wert $n$ hat.
@@ -151,9 +150,9 @@ Liegt uns nun eine Stichprobe $\omega$ vor, so ist auch $X(\omega)=k$ bekannt al
 
 Zum Schätzen fehlt uns noch die Likelihoodfunktion, diese ist hier
 \begin{equation*}
-	L:(0,1)\rightarrow[0,1], \enspace L(p)=P_p(X=k)=\binom{n}{k}*p^k(1-p)^{n-k}
+	L:(0,1)\rightarrow[0,1], \enspace L(p)=f(p|k)=P_p(X=k)=\binom{n}{k}*p^k(1-p)^{n-k}
 \end{equation*}
-da die einzige Stichprobe $X(\omega)=k$ ist und somit $f_{k}(p)=P_p(X=k)$ ist.
+da die einzige Stichprobe $X(\omega)=k$ ist und somit $f(p|k)=P_p(X=k)$ ist (siehe \autoref{eq:likelihoodfunktion}).
 
 Das heißt, es ist die Wahrscheinlichkeit dass $X$ mit Trefferwahrscheinlichkeit $p$ (als Parameter!) den Wert $k$ annimmt. Man sieht, dass diese Funktion ihr Maximum bei dem Wert für $p$ annimmt, unter dem es am wahrscheinlichsten ist, die Stichprobe $\omega$ zu erhalten.
 \begin{center}
@@ -201,7 +200,7 @@ Die Likelihoodfunktion ist mit diesen Werten
 Damit folgt
 \begin{align*}
 	\frac{\diff}{\diff p}L(p) &= \binom{200}{k}*\left[ k*p^{k-1}(1-p)^{200-k} - p^k*(200-k)*(1-p)^{200-k-1}\right]\\
-	&=\underbrace{\binom{200}{16}* p^{k-1}(1-p)^{200-k-1}}_{>0} * \left[ k(1-p)-200p+kp \right]\\
+	&=\underbrace{\binom{200}{16}* p^{k-1}(1-p)^{200-k-1}}_{>0} * \left[ k(1-p)-200p+kp \right]
 \end{align*}%
 Da wir uns für Nullstellen interessieren, betrachten wir nur noch den rechten Teil und erhalten
 \begin{align*}
@@ -231,13 +230,13 @@ Achtung, die Werte der Zufallsvariable $\theta$ werden ebenfalls $\theta$ genann
 
 	Der einfachere Fall ist hierbei, wenn es sich sowohl bei $X$ als auch $\theta$ um diskrete Zufallsvariablen handelt (wir betrachten nur diesen), dann kann man die gemeinsame Verteilung durch die Kontingenztafel darstellen
 	$$
-	\begin{array}{|c|cccc|c|}
-		\hline \text{gem. Dichte}&x_1&x_2&x_i&x_m&\\\hline
+	\begin{array}{c|cccc|c}
+		\text{gem. Dichte}&x_1&x_2&x_i&x_m&\\\hline
 		\theta_1&f(x_1,\theta_1)&f(x_2,\theta_1)&\cdots&f(x_m,\theta_1)&\\
 		\theta_2&f(x_1,\theta_2)&\ddots&&&\\
 		\vdots&\vdots&&f(x_i,\theta_j)&\vdots&f(\theta_j)=\sum_{i=1}^m f(x_i,\theta_j)\\
 		\theta_n&f(x_1,\theta_n)&\cdots&&f(x_m,\theta_n)&\\\hline
-		\text{Randdichte}&&&f(x_j)=\sum_{j=1}^n f(x_i,\theta_j)&&\\\hline
+		\text{Randdichte}&&&f(x_j)=\sum_{j=1}^n f(x_i,\theta_j)&&
 	\end{array}
 	$$
 

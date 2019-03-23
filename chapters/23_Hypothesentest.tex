@@ -4,6 +4,7 @@
 Es ist immer ein Signifikanzniveau $\alpha$ gegeben, mit dem man den Fehler 1. Art beschränkt.
 
 \subsection{Links- rechtsseitiger Hypothesentest}
+Für einen Binomialtest um $p\in\Theta=(0,1)$ zu testen sehen die wichtigen Werte in etwa so aus
 \begin{center}
 	\begin{tabular}{r|ccc}
 		&linksseitig&gemeinsam&rechtsseitig\\\hline
@@ -11,10 +12,12 @@ Es ist immer ein Signifikanzniveau $\alpha$ gegeben, mit dem man den Fehler 1. A
 		Ablehnungsbereich:&&$\Theta_1=(0,1)\setminus\Theta_0$&\\
 		Kritischer Punkt:&\makecell{$k^\ast$ maximal mit\\ $P_{p_0}(X\leq k^\ast)\leq\alpha$}&$\Bigg|$&\makecell{$k^\ast$ minimal mit\\ $P_{p_0}(X\geq k^\ast)\leq\alpha$}\\
 		Kritischer Bereich:&$\mathcal K_1=\simpleset{0,\ldots,k^\ast}$&$\Big|$&$\mathcal K_1=\simpleset{k^\ast,\ldots,n}$\\
-		Gütefunktion:&&$g(\theta)=P_\theta(X\in\mathcal K_1)$&
+		Gütefunktion:&&$g(\theta)=P_\theta(X\in\mathcal K_1)$&\\
+		Signifikanzniveau:&&$\alpha>0$&
 	\end{tabular}
 \end{center}
 
+Eine Gütefunktion für einen rechtsseitigen Test steigt nach rechts an, eine für einen linksseitigen Test fällt von links ab. D.h. immer im Annahmebereich $\Theta_0$ ist sie klein.
 
 Gütefunktion für einen rechtsseitigen Test
 \begin{center}
