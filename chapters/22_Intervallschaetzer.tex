@@ -70,46 +70,23 @@ Wir bestimmen die Schranken $\theta_u(k)$ und $\theta_o(k)$ so, dass die folgend
 	P_{\theta_o(k)}(X\leq k)\overset!=\beta\quad\Rightarrow (\ref{eq:obereSchranke})
 \end{align*}
 
-
-
-
 \paragraph{Beispiel:}
-Ähm was?
-\begin{center}
-	\begin{tikzpicture}[scale=0.8]
-		\draw[->, line width=0.3mm] (0,0) to (8.5,0) node[below] {$p$};
-		\draw[->, line width=0.3mm] (0,0) to (0,5) node[right] {$P_p(X=0)$};
-
-		\draw[line width=0.5mm,scale=1,domain=0:8,smooth,variable=\x,blue, samples=100] plot ({\x},{4.5*exp(-0.5*\x)-0.03});
-
-		\draw[line width=0.5mm,scale=1,domain=0:8,smooth,variable=\x,green, samples=100] plot ({\x},{2});	
-
-		\draw (0,2) node (beta) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$\beta$}] {};
-		\draw (1.6,2) node (Pbeta) [fill = white,circle,inner sep = 0pt,minimum size = 4pt,draw] {};
-
-		\draw (1.6,0) node (po) [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$p_o(0)$}] {};
-
-		\draw[dashed, blue] (po) -- (Pbeta);
-		
-		\draw (0,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below left:$0$}] {};
-		\draw (0,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw] {};
-		
-		\draw (8,0) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum height=4pt,draw, label={below:$1$}] {};
-
-		\draw (0,4.5) node [rectangle,inner sep = 0pt,minimum size = 0pt,minimum width=4pt,draw, label={left:$1$}] {};
-
-
-		\draw [decorate,decoration={brace,amplitude=5pt},yshift=0pt]
-		(1.6,-1) -- (0,-1) node [black,midway,yshift=-0.6cm, align=center] 
-		{\footnotesize Fall 1) $0<p<p_o(0)$\\$\simpleset{p_o\circ X< p}\cap\simpleset{X=0}=\emptyset$};
-
-
-		\draw [decorate,decoration={brace,amplitude=5pt},yshift=0pt]
-		(1.6,2.2) -- (8,2.2) node [black,midway,yshift=0.6cm, xshift=0.6cm, align=center] 
-		{\footnotesize Fall 2) $p_o(0)\leq p<1$\\$P_p(\simpleset{p_o\circ X< p}\cap\simpleset{X=0})\leq P_p(X=0)\leq \beta$};
-	\end{tikzpicture}	
-\end{center}
-
+Ein kleines Beispiel, bei dem wir die Intervallgrenzen in Abhängigkeit von $\beta$ bestimmen werden.
+Ist $X\sim\binomial(2,p)$, dann betrachten wir zunächst die Funktion
+\begin{equation*}
+	P_p(X=k)=\binom *2k p^k(1-p)^{2-k}=\begin{cases}
+		(1-p)^2,&k=0\\
+		2*p(1-p),&k=1\\
+		p^2,&k=2
+	\end{cases}
+\end{equation*}
+Möchten wir nun die Intervallgrenzen $p_u(k)$ beziehungsweise $p_o(k)$ bestimmen ergeben sich wie oben die folgenden Gleichungen
+\begin{align*}
+	P_{p_o(0)}(X\leq 0)&=(1-p_o(0))^2\overset!=\beta&\Rightarrow p_o(0)&=1-\sqrt\beta\\
+	P_{p_o(1)}(X\leq 1)&=(1-p_o(1))^2+2p_o(1)*(1-p_o(1))\overset!= \beta &\Rightarrow p_o(1)&=\sqrt{1-\beta}\\
+	P_{p_u(1)}(X<1)&=(1-p_u(1))^2\overset!=1-\beta&\Rightarrow p_u(1)&=1-\sqrt{1-\beta}\\
+	P_{p_u(2)}(X<2)&=(1-p_u(2))^2+2p_u(2)*(1-p_u(2))\overset!=1-\beta &\Rightarrow p_u(2)&=\sqrt{\beta}\\
+\end{align*}
 
 \subsection{Approximation über die Normalverteilung}
 Für große $n$ werden Binomialverteilungen und das Schätzen von $p$ in der Praxis oft auf die Normalverteilung zurückgeführt und das Problem auf eine Quantilsbestimmung reduziert.
@@ -129,7 +106,7 @@ Damit lassen sich dann die Intervallgrenzen $p_u,p_o$ mit den Quantilen der Stan
 Diese Gleichungen muss man nur noch nach $p_u$ bzw. $p_o$ auflösen (eventuell mit der Mitternachtsformel) und man erhält die Intervallgrenzen zur gegebenen Unsicherheit $\alpha=2\beta$.
 
 \begin{center}
-	\begin{tikzpicture}[scale=0.9]
+	\begin{tikzpicture}[scale=0.4]
 		\draw[->, line width=0.3mm] (-6.5,0) to (6.5,0) node[below] {$x$};
 		\draw[->, line width=0.3mm] (0,0) to (0,6) node[right] {$f^X(x)$};
 
@@ -148,3 +125,25 @@ Diese Gleichungen muss man nur noch nach $p_u$ bzw. $p_o$ auflösen (eventuell m
 		
 	\end{tikzpicture}	
 \end{center}
+
+\paragraph{Beispiel:}
+Sei $X\sim\binomial(n=50,p)$ und es liegt eine Stichprobe mit $k=X(\omega)=30$ vor. Wir möchten nun zur Unsicherheit $\alpha=2\beta=0.05$, d.h. mit $90\%$-iger Sicherheit angeben, in welchem Intervall sich $p$ befindet.
+
+Wir verwenden wieder die Gleichungen von oben und möchten die Intervallgrenzen $p_u,p_o$ bestimmen
+\begin{align*}
+	P_{p_o}(X\leq 30)\approx\Phi\left(\frac{30-50p_o+\frac12}{\sqrt{50p_o*(1-p_o)}}\right)&\overset!=\beta=0.05\\
+	P_{p_u}(X< 30)&\overset!=1-\beta=0.95
+\end{align*}
+Wir bestimmen also das $\beta$ sowie das $1-\beta$-Quantil
+\begin{align*}
+	\Phi(-1.6449)&=0.05\\
+	\Phi(1.6449)&=0.95
+\end{align*}
+Dies können wir dann in folgende Formel einsetzen. Da es sich jeweils um $\pm z_\beta$ handelt, muss die Formel nur einmal ausgerechnet werden, denn $z_\beta$ wird quadriert und wir finden beide Lösungen.
+\begin{align*}
+	\frac{k-np+\frac12}{\sqrt{np(1-p)}}&=\pm z_\beta\\
+	\Leftrightarrow\enspace (n^2-z_\beta^2n)p^2+(-2nk-z_\beta^2n)p+k^2+\frac14&=0.\\
+	\intertext{Mit den eingesetzten Werten erhält man schließlich}
+	\frac{30-50*p+\frac12}{\sqrt{50p(1-p)}}&=\pm 1.6449\\
+	\overset{\text{MNF}}\Rightarrow p_u=0.42049,\ & p_o=0.90537.
+\end{align*}
