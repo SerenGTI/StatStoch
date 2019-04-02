@@ -1,10 +1,16 @@
 %!TEX root = ../main.tex
 \chapter{Hypothesentests}
-\section{Allgemeines zu Tests und Hypothesen}
-Es ist immer ein Signifikanzniveau $\alpha$ gegeben, mit dem man den Fehler 1. Art beschränkt.
+\section{Binomialtest}
+Man beginnt mit einer Hypothese, zum Beispiel möchte man Prüfen ob die Trefferwahrscheinlichkeit einer Binomialverteilung tatsächlich einem bestimmten Wert $p_0$ entspricht.
+Die Nullhypothese wäre dann $H_0: p=p_0$, das heißt keine Besonderheiten. Wir führen später eine Stichprobe durch und entscheiden uns dann abhängig von dessen Ergebnis für oder gegen $H_0$.
 
-\subsection{Links- rechtsseitiger Hypothesentest}
-Für einen Binomialtest um $p\in\Theta=(0,1)$ zu testen sehen die wichtigen Werte in etwa so aus
+Nun kann man sich entscheiden wie man die Gegenhypothese aufstellen will. Abhängig davon ergibt sich die Testcharakteristik
+\begin{enumerate}
+	\item Linksseitiger Test: $H_1: p<p_0$
+	\item Rechtsseitiger Test: $H_1: p>p_0$
+	\item Beidseitiger Test: $H_1: p\neq p_0$
+\end{enumerate}
+Um $p\in\Theta=(0,1)$ einer $\binomial(n,p)$-Verteilung zu testen sehen die wichtigen Werte in etwa so aus (kann insbesondere bei $\Theta$ abweichen)
 \begin{center}
 	\begin{tabular}{r|ccc}
 		&linksseitig&gemeinsam&rechtsseitig\\\hline
@@ -12,16 +18,18 @@ Für einen Binomialtest um $p\in\Theta=(0,1)$ zu testen sehen die wichtigen Wert
 		Ablehnungsbereich:&&$\Theta_1=(0,1)\setminus\Theta_0$&\\
 		Kritischer Punkt:&\makecell{$k^\ast$ maximal mit\\ $P_{p_0}(X\leq k^\ast)\leq\alpha$}&$\Bigg|$&\makecell{$k^\ast$ minimal mit\\ $P_{p_0}(X\geq k^\ast)\leq\alpha$}\\
 		Kritischer Bereich:&$\mathcal K_1=\simpleset{0,\ldots,k^\ast}$&$\Big|$&$\mathcal K_1=\simpleset{k^\ast,\ldots,n}$\\
-		Gütefunktion:&&$g(\theta)=P_\theta(X\in\mathcal K_1)$&\\
-		Signifikanzniveau:&&$\alpha>0$&
+		Gütefunktion:&&$g(p)=P_p(X\in\mathcal K_1)$&\\
 	\end{tabular}
 \end{center}
+Im Beispiel von oben wäre $\Theta_0=\simpleset{p_0}$ und $\Theta_1$ abhängig von der Testcharakteristik so zum Beispiel für einen rechtsseitigen Test $\Theta_1=(p_0,1)$.
 
-Eine Gütefunktion für einen rechtsseitigen Test steigt nach rechts an, eine für einen linksseitigen Test fällt von links ab. D.h. immer im Annahmebereich $\Theta_0$ ist sie klein.
-
-Gütefunktion für einen rechtsseitigen Test
+Den Ablehnungsbereich bestimmt man mithilfe der Gütefunktion an der Stelle $p_0$. Das heißt man bestimmt $k^\ast$ als Grenze des $\mathcal K_1$ so, dass
+\begin{equation*}
+	\forall p\in\Theta_0 : g(p)=P_{p}(X\in\mathcal K_1)\overset!\leq\alpha.
+\end{equation*}
+Das heißt insbesondere, dass die Wahrscheinlichkeit eine falsche Aussage für $H_1$ zu treffen kleiner als $\alpha$ ist (Fehler 1. Art). Für einen rechtsseitigen Test könnte eine Gütefunktion wie folgt aussehen
 \begin{center}
-	\begin{tikzpicture}[scale=0.9]
+	\begin{tikzpicture}[scale=0.75]
 		\draw[->, line width=0.3mm] (0,0) to (8.5,0) node[below] {$\theta$};
 		\draw[->, line width=0.3mm] (0,0) to (0,5) node[right] {$g(\theta)=P_\theta(X\in \mathcal K_1)$};		
 
@@ -53,30 +61,35 @@ Gütefunktion für einen rechtsseitigen Test
 		%Fehler 2. Art
 		\draw [arrows=<->, green, line width=0.3mm] (5.2,2.85) -- (5.2,4);
 		\draw (5.2,4) node (null) [label={above:{\color{green}Fehler 2. Art}}] {};
-		
-		
 	\end{tikzpicture}	
 \end{center}
 
-\subsection{Fehlerarten}
+\paragraph{Fehlerarten}
 \begin{center}
 	\begin{tabular}{r|cc}
 		&$H_0$ gilt&$H_1$ gilt\\\hline
-		$H_0$ nicht abgelehnt&Spezifität&\makecell{Fehler 2. Art\\ false negative}\\
-		$H_0$ abgelehnt&\makecell{Fehler 1. Art\\ false positive}&Sensitivität
+		$H_0$ nicht verworfen&Spezifität&\makecell{Fehler 2. Art\\ false negative}\\
+		$H_0$ verworfen&\makecell{Fehler 1. Art\\ false positive}&Sensitivität
 	\end{tabular}
 \end{center}
 Der Fehler erster Art beschreibt die Wahrscheinlichkeit, die Nullhypothese fälschlicherweise abzulehnen
 \begin{equation*}
-	P_{\theta_0}(X\in \mathcal K_1)
+	P_{p_0}(X\in \mathcal K_1),
 \end{equation*}
+er ist beschränkt durch $\alpha$. Verwirft man also $H_0$, so stimmt diese Aussage mit Wahrscheinlichkeit $(1-\alpha)$.
 
-Der Fehler zweiter Art beschreibt die Wahrscheinlichkeit, die Nullhypothese fälschlicherweise anzunehmen (nicht zu verwerfen)
+
+\subsection{Approximativer Binomialtest}
+Der approximative Binomialtest unterschiedet sich nur in der Bestimmung von $k^\ast$. Dies geschieht hier durch den zentralen Grenzwertsatz, man führt die Binomialverteilung auf eine Standardnormalverteilung zurück und verfährt analog zum Gaußtest.
 \begin{equation*}
-	P_{\theta_1}(X\in \mathcal K_0)
+	\frac{S_n-np}{\sqrt{np(1-p)}}\sim\norm(0,1)
 \end{equation*}
 
-\section{Binomialtest}
+Für einen rechtsseitigen Test.
+Wir lehnen $H_0$ zum Niveau $\alpha$ ab, falls
+\begin{equation*}
+	Z=\frac{S_n-np}{\sqrt{np(1-p)}}>z_{1-\alpha}
+\end{equation*}
 
 \section{Gaußtest (Test mit der Normalverteilung)}
 Wir wollen mit dem Mittelwert der Normalverteilung einen Hypothesentest durchführen. Das heißt also zum Beispiel prüfen ob der Mittelwert tatsächlich einem erwarteten Wert $\mu$ entspricht.
@@ -101,4 +114,62 @@ Wir wollen mit dem Mittelwert der Normalverteilung einen Hypothesentest durchfü
 	für die gegebene Stichprobe gilt, so wird $H_0$ zum gegebenen Signifikanzniveau verworfen.
 \end{enumerate}
 
-\section{$\chi^2$-Anpassungstest}
+\section{Chi-Quadrat-Anpassungstest}
+Der $\chi^2$-Anpassungstest testet eine gegebene Stichprobe auf die zugrundeliegende Verteilung. Die Fragestellung ist also \glqq Sind die gegebenen Werte $\ast$-verteilt?\grqq
+
+Stehen $n$ unabhängige, identische Wiederholungen $X_i$ des Merkmals $X=\simpleset{1,2,\ldots,k}$ zur Verfügung, kann die folgende Tabelle (gedanklich) aufgestellt werden
+\begin{center}
+	\begin{tabular}{r|cccc|l}
+		Ausprägung&$1$&$2$&$\cdots$&$k$&\\\hline
+		absolute Häufigkeit&$h_1$&$h_2$&$\cdots$&$h_k$&$\sum=n$\\
+		erwartete W.-keit&$\pi_1$&$\pi_2$&$\cdots$&$\pi_k$&$\sum=1$
+	\end{tabular}
+\end{center}
+Dabei ist dann die Nullhypothese 
+\begin{equation*}
+	H_0\text{ die Elemente sind verteilt wie $X$, d.h.} \forall i\enspace P(X=i)=\pi_i.
+\end{equation*}
+Man erhält also durch $\tilde h_i =n*\pi_i$ die erwartete Häufigkeit, wenn die Verteilung von $X$ zugrunde liegt.
+Wir testen nun simultan alle Abweichungen der $h_i$ von den erwarteten $\tilde h_i$ mit der $\chi^2$-Teststatistik
+\begin{equation*}
+	\chi^2=\sum_{i=1}^k\frac{(h_i-n*\pi_i)^2}{n*\pi_i}=\sum_{i=1}^k\frac{(h_i-n*\tilde h_i)^2}{\tilde h_i}.
+\end{equation*}
+Ist dieser Wert groß, so handelt es sich höchstwahrscheinlich nicht um die richtige Verteilung.
+
+Da die Zufallsvariable (Teststatistik) $\chi^2$ nun auch $\chi^2(k-1)$-verteilt ist, können wir mit dem $(1-\alpha)$-Quantil der $\chi^2(k-1)$-Verteilung den Ablehnungsbereich bestimmen, dabei ist $\alpha$ das Signifikanzniveau.
+Das heißt, wir verwerfen $H_0$ falls
+\begin{equation*}
+	\chi^2>\chi^2_{(1-\alpha)}(k-1)
+\end{equation*}
+gilt. Dann kann man mit Sicherheit $1-\alpha$ sagen, die Urliste ist nicht verteilt wie $X$.
+
+\section{Chi-Quadrat-Unabhängigkeitstest}
+Der $\chi^2$-Unabhängigkeitstest testet eine Stichprobe von zwei Zufallsvariablen $(X,Y)$ auf Unabhängigkeit.
+Die Nullhypothese lautet also
+\begin{equation*}
+	H_0:\ X\text{ und }Y\text{ sind unabhängig, d.h. }\forall i,j\enspace P(X=i, Y=j)=P(X=i)*P(Y=j).
+\end{equation*}
+Aus der Stichprobe erhält man wieder eine Tabelle der absoluten Häufigkeiten mit den Randhäufigkeiten
+\begin{center}
+	\begin{tabular}{c|cccc|c}
+		&$Y=1$&$Y=2$&$\cdots$&$Y=m$&\\\hline
+		$X=1$&$h_{11}$&$h_{12}$&&$h_{1m}$&$h_{1*}$\\
+		$X=2$&$h_{21}$&$h_{22}$&&$h_{2m}$&$h_{2*}$\\
+		$\vdots$&&&$\ddots$&\\
+		$X=k$&$h_{k1}$&$h_{k2}$&&$h_{km}$&$h_{k*}$\\\hline
+		&$h_{*1}$&$h_{*2}$&&$h_{*m}$&$n$
+	\end{tabular}
+\end{center}
+Aus den Randhäufigkeiten bestimmt man dann die erwarteten Häufigkeiten der Merkmalsausprägungen bei unabhängigen Merkmalen
+\begin{equation*}
+	\tilde h_{ij}=\frac{h_{i*}*h_{*j}}{n}
+\end{equation*}
+Damit bestimmt man schließlich wieder die Chi-Quadrat-Teststatistik
+\begin{equation*}
+	\chi^2=\sum_{i=1}^k \sum_{j=1}^m \frac{(h_{ij}-\tilde h_{ij})^2}{\tilde h_{ij}}.
+\end{equation*}
+Den so erhaltenen Wert vergleicht man wiederum mit dem $1-\alpha$-Quantil. Falls
+\begin{equation*}
+	\chi^2 > \chi^2_{(1-\alpha)}((k-1)*(m-1))
+\end{equation*}
+gilt, so ist die Nullhypothese zu verwerfen.
