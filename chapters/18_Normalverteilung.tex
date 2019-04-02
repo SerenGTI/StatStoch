@@ -181,13 +181,14 @@ Man kann eine binomialverteilte Zufallsvariable $S_n\sim\binomial(n,p)$ durch di
 \begin{equation*}
 	S_n^\ast = \frac{S_n-n*p}{\sqrt{n*p*(1-p)}}\sim\norm(0,1)
 \end{equation*}
-Dabei wurde im Zähler der Erwartungswert und im Nenner die Standardabweichung normalisiert.
+Dies gilt nach dem zentralen Grenzwertsatz. Dabei wurde im Zähler der Erwartungswert und im Nenner die Standardabweichung normalisiert.
 Damit gilt
 \begin{equation*}
 	\lim_{n\to\infty} P(a\leq S_n^\ast \leq b)=\int_a^b \varphi(x)\intd x
 \end{equation*}
 wobei $\varphi(x)=\frac{1}{\sqrt{2\pi}} \exp(-\frac{x^2}{2})$ ist.
 Hierbei ist die Faustregel für eine gute Approximation üblicherweise $n*p*(1-p)>(1-p)$.
+\label{subsec:approximationderbinom}
 
 \par
 \bigskip
