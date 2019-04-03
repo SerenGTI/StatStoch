@@ -63,10 +63,13 @@ Das heißt insbesondere, dass die Wahrscheinlichkeit eine falsche Aussage für $
 		\draw (5.2,4) node (null) [label={above:{\color{green}Fehler 2. Art}}] {};
 	\end{tikzpicture}	
 \end{center}
+Abhängig von der durchgeführten Stichprobe entscheidet man sich für die wahrscheinlichere Hypothese. Das heißt falls $X(\omega)\in\mathcal K_1$ gilt, steht die Stichprobe im widerspruch zu $H_0$ und der Parameter $p_0$ ist sehr unwahrscheinlich, so wird $H_0$ zugunsten von $H_1$ verworfen.
 
+Ist allerdings $X(\omega)\in\mathcal K_0$, so kann die Nullhypothese nicht verworfen werden.
 \paragraph{Fehlerarten}
 \begin{center}
 	\begin{tabular}{r|cc}
+		&\multicolumn{2}{c}{Realität}\\
 		&$H_0$ gilt&$H_1$ gilt\\\hline
 		$H_0$ nicht verworfen&Spezifität&\makecell{Fehler 2. Art\\ false negative}\\
 		$H_0$ verworfen&\makecell{Fehler 1. Art\\ false positive}&Sensitivität
@@ -80,16 +83,18 @@ er ist beschränkt durch $\alpha$. Verwirft man also $H_0$, so stimmt diese Auss
 
 
 \subsection{Approximativer Binomialtest}
-Der approximative Binomialtest unterschiedet sich nur in der Bestimmung von $k^\ast$. Dies geschieht hier durch den zentralen Grenzwertsatz, man führt die Binomialverteilung auf eine Standardnormalverteilung zurück und verfährt analog zum Gaußtest.
+Der approximative Binomialtest unterschiedet sich nur in der Bestimmung von $k^\ast$. Dies geschieht hier durch den zentralen Grenzwertsatz, man führt die Binomialverteilung auf eine Standardnormalverteilung zurück und verfährt analog zum Gaußtest. Es gilt für $X\sim\binomial(n,p)$
 \begin{equation*}
-	\frac{S_n-np}{\sqrt{np(1-p)}}\sim\norm(0,1)
+	\frac{X-np}{\sqrt{np(1-p)}}\sim\norm(0,1)
 \end{equation*}
-
-Für einen rechtsseitigen Test.
-Wir lehnen $H_0$ zum Niveau $\alpha$ ab, falls
-\begin{equation*}
-	Z=\frac{S_n-np}{\sqrt{np(1-p)}}>z_{1-\alpha}
-\end{equation*}
+Man bestimmt $k^\ast$ wie folgt
+\begin{align*}
+	\text{linksseitiger Test}&&&&\text{rechtsseitiger Test}\\
+	P_{p_0}(X\leq k^\ast)&\leq \alpha &&& P_{p_0}(X\geq k^\ast)&\leq \alpha\\
+	\Phi\left(\frac{k^\ast-np_0}{\sqrt{np_0(1-p_0)}}\right)&\leq \alpha &&&\Phi\left(\frac{k^\ast-np_0}{\sqrt{np_0(1-p_0)}}\right)&\leq 1-\alpha\\
+	\frac{k^\ast-np_0}{\sqrt{np_0(1-p_0)}}&\leq z_{\alpha} &&&\frac{k^\ast-np_0}{\sqrt{np_0(1-p_0)}}&\leq z_{1-\alpha}
+\end{align*}
+Dann wird wie bei einem normalen Binomialtest entschieden.
 
 \section{Gaußtest (Test mit der Normalverteilung)}
 Wir wollen mit dem Mittelwert der Normalverteilung einen Hypothesentest durchführen. Das heißt also zum Beispiel prüfen ob der Mittelwert tatsächlich einem erwarteten Wert $\mu$ entspricht.
